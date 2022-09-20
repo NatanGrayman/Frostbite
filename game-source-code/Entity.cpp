@@ -7,6 +7,8 @@ Entity::Entity()        //Constuctor
      yMomentum=0;
      xPosition=0;
      yPosition=0;
+     grounded=true;
+     ticks=0;
 }
 void Entity::drawInWindow(sf::RenderWindow &window)   //Member Function to draw the object in the window.
 {

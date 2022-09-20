@@ -4,6 +4,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include "entity.h"
+#include "player.h"
+#include <string>
 
 class Game
 {
@@ -17,7 +19,7 @@ class Game
         sf::Sprite background; //Sprite initalised to hold the background.
         sf::RenderTexture backgroundTexture; //Create RenderTexture to store background
         void createBackground(); //create background image and stores in background.
-        Entity player;
+        Player player;
         sf::Texture baileyTexture;
 
 };
