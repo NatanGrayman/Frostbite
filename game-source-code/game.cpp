@@ -1,10 +1,12 @@
-#include "Game.h"
+#include "game.h"
+#include "entity.h"
 #include <iostream>
 using namespace std;
 
 Game::Game()
 {
     createBackground();                                // Build the Background sprite.
+    player.loadTexture(baileyTexture,"bailey.png");
 }
 
 void Game::playGame()
@@ -19,6 +21,7 @@ void Game::playGame()
         }
         window.clear(sf::Color(76,109,243));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
+        player.drawInWindow(window);
         window.display();                                               //Display the current frame.
     }
 }
