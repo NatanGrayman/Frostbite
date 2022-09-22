@@ -11,7 +11,7 @@ class Ice : public Entity
         virtual ~Ice(); //destructor
         void changePosition(float x, float y); // set a co-ordinate position of the Ice.
         void movePosition(); //move the Ice block.
-
+        bool findCollision(float x, float y);
     protected:
 
     private:

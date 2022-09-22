@@ -38,3 +38,16 @@ void IceRow::loadTexture(sf::Texture& texture, string name)
         iceRow[i].loadTexture(texture, name); //load the image for each Ice object.
     }
 }
+
+bool IceRow::findCollision(float x, float y) //search for a collision of each Ice block with inputted co-ordinates.
+{
+    for(int i=0;i<num; i++) //loop through each IceRow in iceLevels,
+    {
+        if(iceRow[i].findCollision(x, y)) //search for a collision for the current IceRow.
+        {
+            return true;                    //If a collision is found, return true.
+        }
+    }
+    return false;                           //Otherwise return false.
+}
+

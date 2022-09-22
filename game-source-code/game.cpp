@@ -90,6 +90,7 @@ void Game::playGame()
         iceLevels.drawInWindow(window);
         player.movePlayer();
         player.drawInWindow(window);
+        checkLanded();
         window.display();                                               //Display the current frame.
     }
 }
@@ -117,3 +118,14 @@ void Game::createBackground()                 //Function to create the Backgroun
     background.setTexture(backgroundTexture.getTexture());                        //add background sprite as background
 }
 
+void Game::checkLanded()                                                          //Check for whether the player landed on an Ice block.
+{
+    if(iceLevels.findCollision(player.getXPosition(), player.getYPosition()))   //Search for a collision of the players position within iceLevels.
+    {
+        player.setLanded(true);                                                   //If there is a collision, set the landed state to true.
+    }
+    else
+    {
+        player.setLanded(false);                                                  //Otherwise set the landed state to false.
+    }
+}

@@ -11,6 +11,7 @@ class IceLevels
         void drawInWindow(sf::RenderWindow &window); // render each Ice in the window.
         void movePosition(); //move all Ice blocks.
         void loadTexture(sf::Texture& texture, string name); //load the texture for each element of Ice.
+        bool findCollision(float x, float y);
     protected:
 
     private:

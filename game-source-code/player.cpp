@@ -59,7 +59,10 @@ void Player::movePlayer()                   //function to move player.
         yMomentum=0;           //Stop vertical movement
         ticks=0;               //Reset airtime count
     }
+    if(landed){floorMomentum=2;} //if the player is landed, increase the floor momentum to 2 pixels per second.
+    else{floorMomentum=0;}       //otherwise reset floor momentum to 0
     xPosition+=xMomentum;     //Change the horizontal position of the player
+    xPosition+=floorMomentum; //add the momentum of the floor to the players position
     checkXBoundary();
     yPosition+=yMomentum;     //Change the vertical position of the player
     checkYBoundary();
