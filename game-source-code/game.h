@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 #include "entity.h"
 #include "player.h"
+#include "ice.h"
 #include <string>
 
 class Game
@@ -19,8 +20,9 @@ class Game
         sf::Sprite background; //Sprite initalised to hold the background.
         sf::RenderTexture backgroundTexture; //Create RenderTexture to store background
         void createBackground(); //create background image and stores in background.
-        Player player;
-        sf::Texture baileyTexture;
-
+        Player player;           //Create player object
+        sf::Texture baileyTexture;  //Create Bailey as a texture
+        Ice ice = Ice(-2.f);         //Pass in the initial velocity to the iceblock
+        sf::Texture iceTexture;     //Create a texture for iceBlock
 };
 #endif // GAME_H

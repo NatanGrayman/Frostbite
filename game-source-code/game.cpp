@@ -3,12 +3,15 @@
 #include "player.h"
 #include <iostream>
 #include <string>
+#include "ice.h"
 using namespace std;
 
 Game::Game()
 {
     createBackground();                                // Build the Background sprite.
-    player.loadTexture(baileyTexture, "bailey.png");
+    player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
+    ice.loadTexture(iceTexture, "iceBlock.png");       //add the ice block image as a texture
+    ice.changePosition(0, 250);                        //update position of the ice texture
 }
 
 void Game::playGame()
@@ -34,6 +37,8 @@ void Game::playGame()
         }
         window.clear(sf::Color(76,109,243));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
+        ice.movePosition();
+        ice.drawInWindow(window);
         player.movePlayer();
         player.drawInWindow(window);
         window.display();                                               //Display the current frame.
@@ -60,5 +65,5 @@ void Game::createBackground()                 //Function to create the Backgroun
     backgroundTexture.draw(sunset);                                               //Draw the "sunset" texture.
     backgroundTexture.draw(iceLand);                                              //Draw the "iceland" texture.
     backgroundTexture.display();                                                  //Display each as a texture.
-    background.setTexture(backgroundTexture.getTexture());
+    background.setTexture(backgroundTexture.getTexture());                        //add background sprite as background
 }
