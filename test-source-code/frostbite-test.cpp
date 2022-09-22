@@ -62,3 +62,17 @@ TEST_CASE("Testing Ice Block Movement")
     ice.movePosition();                             //simulate 1 frame of the ice movement.
     CHECK(ice.getXPosition()==102);                 //check that the new position of the block is where it should be based on its velocity.
 }
+TEST_CASE("Testing wrapping of the ice block for rightward movement")
+{
+    Ice ice(2.f);                                   //Create an Ice block with an initial velocity positive (right) of 2 pixels per frame.
+    ice.changePosition(800,250);                    //set the Ice block to a new position.
+    ice.movePosition();                             //simulate 1 frame of the ice movement.
+    CHECK(ice.getXPosition()==-93);                 //check that the new position of the block is where it should be when wrapping around.
+}
+TEST_CASE("Testing wrapping of the ice block for leftward movement")
+{
+    Ice ice(-2.f);                                   //Create an Ice block with an initial velocity negative (left) of 2 pixels per frame.
+    ice.changePosition(-95,250);                    //set the Ice block to a new position.
+    ice.movePosition();                             //simulate 1 frame of the ice movement.
+    CHECK(ice.getXPosition()==798);                 //check that the new position of the block is where it should be when wrapping around.
+}
