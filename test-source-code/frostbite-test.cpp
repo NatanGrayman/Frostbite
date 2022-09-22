@@ -41,10 +41,10 @@ TEST_CASE("Testing Player Down movement")
 
 TEST_CASE("Testing Player Upwards movement")
 {
-    Player player;                                  //Player object
+    Player player(300,200);                                  //Player object
     player.processEvents(sf::Keyboard::Up, true);   //Pass into processEvents loops the specific testing movement and simulating as pressed.
     player.movePlayer();                            //Move the player
-    CHECK(player.getYPosition()==155);              //Check the new position is as expected
+    CHECK(player.getYPosition()==195);              //Check the new position is as expected
 }
 
 TEST_CASE("Testing Ice Block Initialization")
@@ -75,4 +75,30 @@ TEST_CASE("Testing wrapping of the ice block for leftward movement")
     ice.changePosition(-95,250);                    //set the Ice block to a new position.
     ice.movePosition();                             //simulate 1 frame of the ice movement.
     CHECK(ice.getXPosition()==798);                 //check that the new position of the block is where it should be when wrapping around.
+}
+
+TEST_CASE("Testing Player Vertical Boundary")
+{
+    Player player(300, 160);                         //Player object initialized at highest position.
+    player.processEvents(sf::Keyboard::Up, true);   //Pass into processEvents loops the specific testing movement and simulating as pressed.
+    player.movePlayer();                            //Move the player
+    CHECK(player.getYPosition()==160);              //Check at same max vertical position, due to boundary.
+
+    Player player2(300,440);
+    player2.processEvents(sf::Keyboard::Down, true);  //Pass into processEvents loops the specific testing movement and simulating as pressed.
+    player2.movePlayer();                             //Move the player.
+    CHECK(player2.getYPosition()==440);              //Check at same minumum vertical position, due to boundary.
+}
+
+TEST_CASE("Testing Player Horizontal Boundary")
+{
+    Player player(800-32,160);                         //Set at rightmost xPosition (window width-bailey width).
+    player.processEvents(sf::Keyboard::Right, true);   //Pass into processEvents loops the specific testing movement and simulating as pressed.
+    player.movePlayer();                               //Move the player
+    CHECK(player.getXPosition()==800-32);              //Check at same rightmost horizontal position, due to boundary.
+
+    Player player2(0,160);                             //Set at leftmost xPosition.
+    player2.processEvents(sf::Keyboard::Left, true);   //Pass into processEvents loops the specific testing movement and simulating as pressed.
+    player2.movePlayer();                               //Move the player
+    CHECK(player2.getXPosition()==0);                  //Check at same leftmost horizontal position, due to boundary.
 }

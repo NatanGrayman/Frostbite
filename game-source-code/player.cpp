@@ -3,8 +3,14 @@
 
 Player::Player()
 {
-    xPosition= 300;
+    xPosition = 300;
     yPosition = 160;   //Setting the initial Position
+}
+
+Player::Player(float xInitial, float yInitial)
+{
+    xPosition = xInitial;
+    yPosition = yInitial;
 }
 
 Player::~Player()
