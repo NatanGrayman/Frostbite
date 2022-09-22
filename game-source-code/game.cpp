@@ -4,11 +4,12 @@
 #include <iostream>
 #include <string>
 #include "ice.h"
+#include "iceRow.h"
 using namespace std;
 
 Game::Game()
 {
-    ice.changePosition(0, 250);                                     //update position of the ice texture
+
 }
 
 void Game::splashScreen()                                       //Function to control splashscreen
@@ -53,7 +54,7 @@ void Game::splashScreen()                                       //Function to co
 void Game::loadAllTextures()
 {
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
-    ice.loadTexture(iceTexture, "iceBlock.png");       //add the ice block image as a texture
+    iceRow.loadEachTexture(iceTexture, "iceBlock.png");       //add the ice block image as a texture
 }
 
 void Game::playGame()
@@ -80,8 +81,8 @@ void Game::playGame()
         }
         window.clear(sf::Color(76,109,243));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
-        ice.movePosition();
-        ice.drawInWindow(window);
+        iceRow.movePosition();
+        iceRow.drawEachInWindow(window);
         player.movePlayer();
         player.drawInWindow(window);
         window.display();                                               //Display the current frame.

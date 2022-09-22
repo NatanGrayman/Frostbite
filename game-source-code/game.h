@@ -6,6 +6,7 @@
 #include "entity.h"
 #include "player.h"
 #include "ice.h"
+#include "iceRow.h"
 #include <string>
 
 class Game
@@ -24,7 +25,7 @@ class Game
         void createBackground(); //create background image and stores in background.
         Player player;           //Create player object
         sf::Texture baileyTexture;  //Create Bailey as a texture
-        Ice ice = Ice(-2.f);         //Pass in the initial velocity to the iceblock
+        IceRow iceRow = IceRow(250, 2);         //Pass in the initial velocity to the iceblock
         sf::Texture iceTexture;     //Create a texture for iceBlock
         void loadAllTextures();
 };
