@@ -15,9 +15,9 @@ void Ice::movePosition()   //Member function to move the iceBlock
     xPosition+=xMomentum;  //Increase horizonal position as horizontal speed increases
     if(xMomentum>0)        //If the iceBlock is moving:
     {
-        int n = int(xPosition/800);          //xPosition/game window-width-size gives a fraction either 0 or 1 as an integer
-        xPosition=float(int(xPosition)%800); //Modulas of game-window-width-size shows how much further the ice block has moved passed boundary
-        xPosition=xPosition-(n*95);          //If the Ice is passed the width of the object, subtract its width - enables wrapping.
+        bool isOverflow = int(xPosition/800);          //xPosition/game window-width-size gives a fraction either 0 or 1 as an integer
+        xPosition=float(int(xPosition)%800);           //Modulas of game-window-width-size shows how much further the ice block has moved passed boundary
+        xPosition=xPosition-(isOverflow*95);          //If the Ice is passed the width of the object, subtract its width - enables wrapping.
     }
     else if(xPosition<-95)                   //if the ice moves to the left of the screen.
     {

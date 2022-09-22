@@ -37,7 +37,7 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)   //Act on 
     }
     else
     {
-            xMomentum=0;                                 //If the key has been released by user then stop horizontal movement.
+        xMomentum=0;                                 //If the key has been released by user then stop horizontal movement.
     }
 }
 
@@ -54,6 +54,32 @@ void Player::movePlayer()                   //function to move player.
         ticks=0;               //Reset airtime count
     }
     xPosition+=xMomentum;     //Change the horizontal position of the player
+    checkXBoundary();
     yPosition+=yMomentum;     //Change the vertical position of the player
+    checkYBoundary();
     positionUpdate();         //Now update the position of sprite.
+}
+
+void Player::checkXBoundary()
+{
+    if(xPosition>800-32)   //Check the horizontal boundary with the total width minus Bailey's width.
+    {
+        xPosition=800-32;  //Ensure stays at boundary position.
+    }
+    else if(xPosition<=0)  //Check the leftmost horizontal boundary
+    {
+        xPosition=0;      //Set as 0 to ensure does not go out of bounds.
+    }
+}
+void Player::checkYBoundary()
+{
+
+    if(yPosition>440)    //Check the vertical  bottom boundary and ensure can not 'jump' down on lowest ice-level.
+    {
+        yPosition=440;
+    }
+    else if(yPosition<160)  //Check the vertical upward boundary and ensure can not 'jump' up on highest level (iceland).
+    {
+        yPosition=160;
+    }
 }

@@ -10,7 +10,6 @@ using namespace std;
 
 Game::Game()
 {
-
 }
 
 void Game::splashScreen()                                       //Function to control splashscreen
@@ -41,6 +40,7 @@ void Game::splashScreen()                                       //Function to co
             {
                 window.close();                                        //If the close button is pressed, Close the game window.
             }
+            if(event.key.code==sf::Keyboard::Escape){window.close();}
             if(event.key.code == sf::Keyboard::Enter)                     //If the enter key is pressed,
             {
                 start = true;                                      //The game can now start
@@ -73,7 +73,11 @@ void Game::playGame()
             }
             if(event.type == sf::Event::KeyPressed)                     //If a key is pressed,
             {
-                player.processEvents(event.key.code,true);              //process the event.
+                if(event.key.code==sf::Keyboard::Escape){window.close();}
+                else
+                {
+                    player.processEvents(event.key.code,true);              //process the event.
+                }
             }
             if(event.type ==sf::Event::KeyReleased)                     //If the key is released,
             {

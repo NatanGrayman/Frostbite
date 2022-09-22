@@ -12,6 +12,8 @@ class Player : public Entity
     protected:
 
     private:
+        void checkXBoundary();    //Function to check not out of bounds in horizontal direction
+        void checkYBoundary();    //Function to check not out of bounds in vertical direction
 };
 
 #endif // PLAYER_H
