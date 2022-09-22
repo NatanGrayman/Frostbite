@@ -5,6 +5,7 @@
 #include <string>
 #include "ice.h"
 #include "iceRow.h"
+#include "iceLevels.h"
 using namespace std;
 
 Game::Game()
@@ -54,7 +55,7 @@ void Game::splashScreen()                                       //Function to co
 void Game::loadAllTextures()
 {
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
-    iceRow.loadEachTexture(iceTexture, "iceBlock.png");       //add the ice block image as a texture
+    iceLevels.loadTexture(iceTexture, "iceBlock.png");       //add the ice block image as a texture
 }
 
 void Game::playGame()
@@ -79,10 +80,10 @@ void Game::playGame()
                 player.processEvents(event.key.code,false);             //process the release.
             }
         }
-        window.clear(sf::Color(76,109,243));                            //clear the background of the window background color.
+        window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
-        iceRow.movePosition();
-        iceRow.drawEachInWindow(window);
+        iceLevels.movePosition();
+        iceLevels.drawInWindow(window);
         player.movePlayer();
         player.drawInWindow(window);
         window.display();                                               //Display the current frame.
