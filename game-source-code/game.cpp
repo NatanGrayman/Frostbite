@@ -8,9 +8,48 @@ using namespace std;
 
 Game::Game()
 {
-    createBackground();                                // Build the Background sprite.
-    ice.changePosition(0, 250);                        //update position of the ice texture
+    ice.changePosition(0, 250);                                     //update position of the ice texture
 }
+
+void Game::splashScreen()                                       //Function to control splashscreen
+{
+    sf::Sprite splashSprite;                                    //Create sprite for the splash screen
+    sf::Texture splashTexture;                                  //Create texture for the splash screen
+
+    if(!splashTexture.loadFromFile("resources/splashScreen.png"))  //load from file specific splashtexture.
+    {
+        cout<<"Error in loading texture";                          //Error message if does not load
+    }
+
+    splashSprite.setTexture(splashTexture);                       //Set the texture of the sprite.
+    float xScale = float(width)/1280;                             //Create the scale of the width to fit the window
+    float yScale = float(height)/720;                             //Create the scale of the height to fit the window
+    splashSprite.setScale(sf::Vector2f(xScale,yScale));           //Set the scale
+
+    window.clear();
+    window.draw(splashSprite);                                     //Draw in the splashsprite
+    window.display();
+    window.setFramerateLimit(60);                                       //Set the frame limit to 60.
+    while(window.isOpen())                                              //Loop as long as window is open
+    {
+        sf::Event event;                                                //Create an event object to monitor for inputs.
+        while (window.pollEvent(event))                                 //For each event that occurs.
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                window.close();                                        //If the close button is pressed, Close the game window.
+            }
+            if(event.key.code == sf::Keyboard::Enter)                     //If the enter key is pressed,
+            {
+                start = true;                                      //The game can now start
+                createBackground();                                // Build the Background sprite.
+                loadAllTextures();                                 //Load all the textures
+                return;                                            //End the test.
+            }
+        }
+    }
+}
+
 void Game::loadAllTextures()
 {
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
@@ -19,6 +58,7 @@ void Game::loadAllTextures()
 
 void Game::playGame()
 {
+    if(!start){return;};                                                //Check that user wants to play.
     window.setFramerateLimit(60);                                       //Set the frame limit to 60.
     while(window.isOpen())                                              //Loop as long as window is open
     {
