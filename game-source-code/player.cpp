@@ -3,6 +3,7 @@
 
 Player::Player()
 {
+    xPosition= 300;
     yPosition = 160;   //Setting the initial Position
 }
 

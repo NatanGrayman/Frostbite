@@ -9,9 +9,13 @@ using namespace std;
 Game::Game()
 {
     createBackground();                                // Build the Background sprite.
+    ice.changePosition(0, 250);                        //update position of the ice texture
+}
+void Game::loadAllTextures()
+{
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
     ice.loadTexture(iceTexture, "iceBlock.png");       //add the ice block image as a texture
-    ice.changePosition(0, 250);                        //update position of the ice texture
+
 }
 
 void Game::playGame()
@@ -67,3 +71,4 @@ void Game::createBackground()                 //Function to create the Backgroun
     backgroundTexture.display();                                                  //Display each as a texture.
     background.setTexture(backgroundTexture.getTexture());                        //add background sprite as background
 }
+

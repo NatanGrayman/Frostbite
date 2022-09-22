@@ -14,6 +14,7 @@ class Game
         Game(); //Game constructor
         sf::RenderWindow window{sf::VideoMode(800, 540), "FrostBite"}; //Game window
         void playGame();
+        void loadAllTextures();
     private:
         int width=800; //Set initial width.
         int height=540; //Set initial height.

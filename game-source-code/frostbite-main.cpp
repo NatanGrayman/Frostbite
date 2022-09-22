@@ -6,6 +6,7 @@
 int main()
 {
     Game game = Game();
+    game.loadAllTextures();
     game.playGame();
     return 0;
 }
