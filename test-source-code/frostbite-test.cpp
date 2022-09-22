@@ -47,3 +47,18 @@ TEST_CASE("Testing Player Upwards movement")
     CHECK(player.getYPosition()==155);              //Check the new position is as expected
 }
 
+TEST_CASE("Testing Ice Block Initialization")
+{
+    Ice ice(2.f);                                   //Create an Ice block with an initial velocity of 2 pixels per frame.
+    ice.changePosition(0,250);                      //set the Ice block to a new position.
+    CHECK(ice.getXPosition()==0);                   //check that the changePosition function is working by checking the x position.
+    CHECK(ice.getYPosition()==250);                 //check that the changePosition function is working by checking the y position.
+}
+
+TEST_CASE("Testing Ice Block Movement")
+{
+    Ice ice(2.f);                                   //Create an Ice block with an initial velocity of 2 pixels per frame.
+    ice.changePosition(100,250);                    //set the Ice block to a new position.
+    ice.movePosition();                             //simulate 1 frame of the ice movement.
+    CHECK(ice.getXPosition()==102);                 //check that the new position of the block is where it should be based on its velocity.
+}

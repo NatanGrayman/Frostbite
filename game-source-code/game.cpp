@@ -15,7 +15,6 @@ void Game::loadAllTextures()
 {
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
     ice.loadTexture(iceTexture, "iceBlock.png");       //add the ice block image as a texture
-
 }
 
 void Game::playGame()
