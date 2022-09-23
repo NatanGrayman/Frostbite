@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
-#include "entity.h"
+#include "Entity.h"
 #include <string>
 
 using namespace std;
@@ -25,8 +25,6 @@ protected:
     float yPosition;   //Store yPosition of entities
     float xMomentum;   //Store the x direction momentum of entity
     float yMomentum;   //Store the y direction momentum of entity
-    bool grounded;     //grounded as a boolean to know if in air vs ground
-    int ticks;         //ticks to count jumping time.
 private:
 
 };

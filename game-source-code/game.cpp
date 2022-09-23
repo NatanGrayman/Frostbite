@@ -1,11 +1,12 @@
 #include "game.h"
-#include "entity.h"
+#include "Entity.h"
 #include "player.h"
 #include <iostream>
 #include <string>
 #include "ice.h"
 #include "iceRow.h"
 #include "iceLevels.h"
+#include <math.h>
 using namespace std;
 
 Game::Game()
@@ -120,12 +121,15 @@ void Game::createBackground()                 //Function to create the Backgroun
 
 void Game::checkLanded()                                                          //Check for whether the player landed on an Ice block.
 {
-    if(iceLevels.findCollision(player.getXPosition(), player.getYPosition()))   //Search for a collision of the players position within iceLevels.
+    int state = (iceLevels.findCollision(player.getXPosition(), player.getYPosition()));
+    if(state>=0)                                                                  //Search for a collision of the players position within iceLevels.
     {
         player.setLanded(true);                                                   //If there is a collision, set the landed state to true.
+        player.setFloorMomentum(2*pow(-1,state));
     }
     else
     {
         player.setLanded(false);                                                  //Otherwise set the landed state to false.
+        player.setFloorMomentum(0);
     }
 }

@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
-#include "entity.h"
+#include "Entity.h"
 #include "player.h"
 #include "ice.h"
 #include "iceRow.h"

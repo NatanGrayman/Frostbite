@@ -1,5 +1,5 @@
-#include "IceLevels.h"
-#include "IceRow.h"
+#include "iceLevels.h"
+#include "iceRow.h"
 #include <vector>
 
 IceLevels::IceLevels()
@@ -43,15 +43,20 @@ void IceLevels::loadTexture(sf::Texture& texture, string name)
     }
 }
 
-bool IceLevels::findCollision(float x, float y) //search for a collision of each Ice block with inputted co-ordinates.
+void IceLevels::loadOneRowTexture(sf::Texture& texture, string name, int rowNum)
+{
+    iceLevels[rowNum].loadTexture(texture, name);
+}
+
+int IceLevels::findCollision(float x, float y) //search for a collision of each Ice block with inputted co-ordinates.
 {
     for(int j=0;j<4; j++) //loop through each IceRow in iceLevels,
     {
         if(iceLevels[j].findCollision(x, y)) //search for a collision for the current IceRow.
         {
-            return true;                    //If a collision is found, return true.
+            return j;                    //If a collision is found, return true.
         }
     }
-    return false;                           //Otherwise return false.
+    return -1;                           //Otherwise return false.
 }
 

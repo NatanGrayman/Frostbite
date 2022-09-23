@@ -1,6 +1,6 @@
 #ifndef ICEROW_H
 #define ICEROW_H
-#include "Ice.h"
+#include "ice.h"
 #include <vector>
 
 class IceRow

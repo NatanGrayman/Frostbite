@@ -1,10 +1,12 @@
-#include "Player.h"
-#include "entity.h"
+#include "player.h"
+#include "Entity.h"
 
 Player::Player()
 {
     xPosition = 300;
     yPosition = 160;   //Setting the initial Position
+    grounded=true;
+    ticks=0;
 }
 
 Player::Player(float xInitial, float yInitial)
@@ -49,6 +51,7 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)   //Act on 
 
 void Player::movePlayer()                   //function to move player.
 {
+    if(grounded && !(landed || yPosition==160)){xPosition=300;yPosition=160;};
     if(!grounded)               //Check not grounded to set time in 'air'
     {
         ticks++;               //increase time in 'air'
@@ -59,8 +62,6 @@ void Player::movePlayer()                   //function to move player.
         yMomentum=0;           //Stop vertical movement
         ticks=0;               //Reset airtime count
     }
-    if(landed){floorMomentum=2;} //if the player is landed, increase the floor momentum to 2 pixels per second.
-    else{floorMomentum=0;}       //otherwise reset floor momentum to 0
     xPosition+=xMomentum;     //Change the horizontal position of the player
     xPosition+=floorMomentum; //add the momentum of the floor to the players position
     checkXBoundary();

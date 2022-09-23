@@ -1,7 +1,7 @@
 #ifndef ICELEVELS_H
 #define ICELEVELS_H
 #include <vector>
-#include "IceRow.h"
+#include "iceRow.h"
 
 class IceLevels
 {
@@ -11,7 +11,8 @@ class IceLevels
         void drawInWindow(sf::RenderWindow &window); // render each Ice in the window.
         void movePosition(); //move all Ice blocks.
         void loadTexture(sf::Texture& texture, string name); //load the texture for each element of Ice.
-        bool findCollision(float x, float y);
+        void loadOneRowTexture(sf::Texture& texture, string name, int rowNum); //load the texture for a specific row of Ice.
+        int findCollision(float x, float y);
     protected:
 
     private:
