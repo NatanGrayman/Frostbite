@@ -1,4 +1,4 @@
-#include "Ice.h"
+#include "ice.h"
 
 Ice::Ice(float velocity)    //Constructor to set the speed of the iceBlock
 {

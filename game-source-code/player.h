@@ -13,6 +13,7 @@ class Player : public Entity
         void setLanded(bool state){landed=state;};
         bool getLanded(){return landed;};
         void setFloorMomentum(float x){floorMomentum=x;};
+        bool getGrounded(){return grounded;};
     protected:
 
     private:

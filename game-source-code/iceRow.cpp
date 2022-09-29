@@ -31,7 +31,7 @@ void IceRow::movePosition() //update the iceRows position/s.
     }
 }
 
-void IceRow::loadTexture(sf::Texture& texture, string name)
+void IceRow::loadTexture(/*sf::Texture& texture,*/ string name)
 {
     for(int i=0;i<num; i++) //loop through each ice block in the vector,
     {

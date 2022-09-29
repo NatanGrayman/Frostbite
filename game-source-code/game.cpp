@@ -56,7 +56,7 @@ void Game::splashScreen()                                       //Function to co
 void Game::loadAllTextures()
 {
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
-    iceLevels.loadTexture(iceTexture, "iceBlock.png");       //add the ice block image as a texture
+    iceLevels.loadTexture(/*iceTexture,*/ "iceBlock.png");       //add the ice block image as a texture
 }
 
 void Game::playGame()
@@ -121,11 +121,13 @@ void Game::createBackground()                 //Function to create the Backgroun
 
 void Game::checkLanded()                                                          //Check for whether the player landed on an Ice block.
 {
+    if(!player.getGrounded()){player.setLanded(false); player.setFloorMomentum(0);iceLevels.resetActive();return;};//only check when on the ground.
     int state = (iceLevels.findCollision(player.getXPosition(), player.getYPosition()));
     if(state>=0)                                                                  //Search for a collision of the players position within iceLevels.
     {
         player.setLanded(true);                                                   //If there is a collision, set the landed state to true.
         player.setFloorMomentum(2*pow(-1,state));
+        //iceLevels.loadOneRowTexture("landOnIceBlock.png", state);
     }
     else
     {

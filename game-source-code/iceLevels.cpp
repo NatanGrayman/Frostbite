@@ -35,17 +35,17 @@ void IceLevels::movePosition()
     }
 }
 
-void IceLevels::loadTexture(sf::Texture& texture, string name)
+void IceLevels::loadTexture(/*sf::Texture& texture,*/ string name)
 {
     for(int j=0;j<4; j++) //loop through each IceRow in iceLevels,
     {
-        iceLevels[j].loadTexture(texture, name); //load the ice block texture for each row.
+        iceLevels[j].loadTexture(/*texture,*/ name); //load the ice block texture for each row.
     }
 }
 
-void IceLevels::loadOneRowTexture(sf::Texture& texture, string name, int rowNum)
+void IceLevels::loadOneRowTexture(/*sf::Texture& texture,*/ string name, int rowNum)
 {
-    iceLevels[rowNum].loadTexture(texture, name);
+    iceLevels[rowNum].loadTexture(/*texture,*/ name);
 }
 
 int IceLevels::findCollision(float x, float y) //search for a collision of each Ice block with inputted co-ordinates.
@@ -54,9 +54,22 @@ int IceLevels::findCollision(float x, float y) //search for a collision of each 
     {
         if(iceLevels[j].findCollision(x, y)) //search for a collision for the current IceRow.
         {
+            loadOneRowTexture("landOnIceBlock.png", j);
+            activated[j] = true;
+            if(count(activated.begin(), activated.end(), 1) == 4){loadTexture("iceBlock.png");};
             return j;                    //If a collision is found, return true.
         }
     }
     return -1;                           //Otherwise return false.
 }
 
+void IceLevels::resetActive()
+{
+    if(count(activated.begin(), activated.end(), 1) == 4)
+    {
+        for(int j=0;j<4;j++)
+        {
+            activated[j] = 0;
+        }
+    }
+}
