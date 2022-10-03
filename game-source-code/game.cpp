@@ -57,6 +57,7 @@ void Game::loadAllTextures()
 {
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
     iceLevels.loadTexture(/*iceTexture,*/ "iceBlock.png");       //add the ice block image as a texture
+    loadFont();
 }
 
 void Game::playGame()
@@ -92,6 +93,8 @@ void Game::playGame()
         player.movePlayer();
         player.drawInWindow(window);
         checkLanded();
+        scoreText.setString(to_string(score));
+        window.draw(scoreText);
         window.display();                                               //Display the current frame.
     }
 }
@@ -128,10 +131,20 @@ void Game::checkLanded()                                                        
         player.setLanded(true);                                                   //If there is a collision, set the landed state to true.
         player.setFloorMomentum(2*pow(-1,state));
         //iceLevels.loadOneRowTexture("landOnIceBlock.png", state);
+        score+=((!iceLevels.getActive(state))*100);
+        iceLevels.setActive(state);
     }
     else
     {
         player.setLanded(false);                                                  //Otherwise set the landed state to false.
         player.setFloorMomentum(0);
     }
+}
+
+void Game::loadFont()
+{
+    if(!scoreFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};
+    scoreText.setFont(scoreFont);
+    scoreText.setCharacterSize(24);
+    scoreText.setFillColor(sf::Color::Red);
 }

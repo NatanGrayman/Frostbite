@@ -30,5 +30,11 @@ class Game
         //sf::Texture iceTexture;     //Create a texture for iceBlock
         void loadAllTextures();
         void checkLanded();
+        //
+        int score=0;
+        sf::Font scoreFont;
+        sf::Text scoreText;
+        void loadFont();
+        void displayScore();
 };
 #endif // GAME_H

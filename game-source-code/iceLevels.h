@@ -14,6 +14,8 @@ class IceLevels
         void loadOneRowTexture(/*sf::Texture& texture,*/ string name, int rowNum); //load the texture for a specific row of Ice.
         int findCollision(float x, float y);
         void resetActive();
+        bool getActive(int n){return activated[n];};
+        void setActive(int n){activated[n]=true;};
     protected:
 
     private:
