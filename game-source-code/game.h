@@ -36,5 +36,9 @@ class Game
         sf::Text scoreText;
         void loadFont();
         void displayScore();
+        void loadIgloo();
+        int iglooStage=0;
+        vector<sf::RectangleShape> iglooPieces;
+        void drawIgloo();
 };
 #endif // GAME_H
