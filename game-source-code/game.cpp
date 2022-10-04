@@ -57,7 +57,7 @@ void Game::loadAllTextures()
 {
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
     iceLevels.loadTexture(/*iceTexture,*/ "iceBlock.png");       //add the ice block image as a texture
-    loadFont();
+    score.loadFont();
 }
 
 void Game::playGame()
@@ -94,8 +94,7 @@ void Game::playGame()
         player.drawInWindow(window);
         checkLanded();
         igloo.drawIgloo(window);
-        scoreText.setString(to_string(score));
-        window.draw(scoreText);
+        score.drawScore(window);
         window.display();                                               //Display the current frame.
     }
 }
@@ -133,7 +132,7 @@ void Game::checkLanded()                                                        
         player.setFloorMomentum(2*pow(-1,state));
         //iceLevels.loadOneRowTexture("landOnIceBlock.png", state);
         bool initialLanding = (!iceLevels.getActive(state));                      //If first time landed on block
-        score+=(initialLanding*10);
+        score.changeScore(initialLanding*10);
         if(initialLanding&&igloo.getStage()<16){igloo.incrementStage();};
         iceLevels.setActive(state);
     }
@@ -144,10 +143,3 @@ void Game::checkLanded()                                                        
     }
 }
 
-void Game::loadFont()
-{
-    if(!scoreFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};
-    scoreText.setFont(scoreFont);
-    scoreText.setCharacterSize(24);
-    scoreText.setFillColor(sf::Color::Red);
-}

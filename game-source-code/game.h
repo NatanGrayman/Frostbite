@@ -10,6 +10,7 @@
 #include "iceLevels.h"
 #include <string>
 #include "igloo.h"
+#include "score.h"
 class Game
 {
     public:
@@ -30,13 +31,7 @@ class Game
         //sf::Texture iceTexture;     //Create a texture for iceBlock
         void loadAllTextures();
         void checkLanded();
-        //
-        int score=0;
-        sf::Font scoreFont;
-        sf::Text scoreText;
-        void loadFont();
-        void displayScore();
         Igloo igloo;
-
+        Score score;
 };
 #endif // GAME_H
