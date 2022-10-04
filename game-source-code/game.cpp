@@ -78,12 +78,12 @@ void Game::playGame()
                 if(event.key.code==sf::Keyboard::Escape){window.close();}
                 else
                 {
-                    player.processEvents(event.key.code,true);              //process the event.
+                    player.processEvents(event.key.code,true, finished);              //process the event.
                 }
             }
             if(event.type ==sf::Event::KeyReleased)                     //If the key is released,
             {
-                player.processEvents(event.key.code,false);             //process the release.
+                player.processEvents(event.key.code,false, finished);             //process the release.
             }
         }
         window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
@@ -93,8 +93,9 @@ void Game::playGame()
         player.movePlayer();
         player.drawInWindow(window);
         checkLanded();
-        igloo.drawIgloo(window);
+        igloo.drawIgloo(window, stage);
         score.drawScore(window);
+        finished = int(stage/16);
         window.display();                                               //Display the current frame.
     }
 }
@@ -133,7 +134,7 @@ void Game::checkLanded()                                                        
         //iceLevels.loadOneRowTexture("landOnIceBlock.png", state);
         bool initialLanding = (!iceLevels.getActive(state));                      //If first time landed on block
         score.changeScore(initialLanding*10);
-        if(initialLanding&&igloo.getStage()<16){igloo.incrementStage();};
+        if(initialLanding&&stage<16){stage++;};
         iceLevels.setActive(state);
     }
     else

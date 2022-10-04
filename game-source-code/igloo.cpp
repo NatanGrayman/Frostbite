@@ -26,9 +26,9 @@ Igloo::Igloo()
     iglooPieces.push_back(iglooDoor);
 }
 
-void Igloo::drawIgloo(sf::RenderWindow& window)
+void Igloo::drawIgloo(sf::RenderWindow& window, int stage)
 {
-    for(int i=0; i<iglooStage; i++)
+    for(int i=0; i<stage; i++)
     {
         sf::RectangleShape piece = iglooPieces[i];
         window.draw(piece);

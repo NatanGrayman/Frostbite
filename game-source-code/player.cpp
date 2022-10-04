@@ -20,7 +20,7 @@ Player::~Player()
     //dtor
 }
 
-void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)   //Act on user input
+void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFinished=false)   //Act on user input
 {
     if(checkPressed==true)
     {
@@ -31,6 +31,7 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)   //Act on 
         }
         if(key==sf::Keyboard::Up && grounded)               //If up key was pressed and the player is grounded, set movement of player upwards(jump).
         {
+            if(gameFinished && (xPosition+36)>550 && xPosition<650){finishGame();};
             yMomentum=-5;
             grounded=false;
         }
@@ -92,4 +93,9 @@ void Player::checkYBoundary()
     {
         yPosition=160;
     }
+}
+
+void Player::finishGame()
+{
+    cout<<"Player has won the game"<<endl;
 }

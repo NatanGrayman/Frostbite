@@ -33,5 +33,7 @@ class Game
         void checkLanded();
         Igloo igloo;
         Score score;
+        int stage=0;
+        bool finished = false;
 };
 #endif // GAME_H

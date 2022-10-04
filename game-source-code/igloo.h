@@ -11,14 +11,10 @@ class Igloo
     public:
         Igloo();
         virtual ~Igloo();
-        void drawIgloo(sf::RenderWindow& window);
-        void incrementStage(){iglooStage++;};
-        int getStage(){return iglooStage;};
+        void drawIgloo(sf::RenderWindow& window, int stage);
     protected:
 
     private:
-
-        int iglooStage=0;
         vector<sf::RectangleShape> iglooPieces;
 };
 
