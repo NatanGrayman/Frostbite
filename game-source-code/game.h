@@ -9,7 +9,7 @@
 #include "iceRow.h"
 #include "iceLevels.h"
 #include <string>
-
+#include "igloo.h"
 class Game
 {
     public:
@@ -36,9 +36,7 @@ class Game
         sf::Text scoreText;
         void loadFont();
         void displayScore();
-        void loadIgloo();
-        int iglooStage=0;
-        vector<sf::RectangleShape> iglooPieces;
-        void drawIgloo();
+        Igloo igloo;
+
 };
 #endif // GAME_H

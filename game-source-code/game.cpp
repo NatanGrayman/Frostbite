@@ -58,7 +58,6 @@ void Game::loadAllTextures()
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
     iceLevels.loadTexture(/*iceTexture,*/ "iceBlock.png");       //add the ice block image as a texture
     loadFont();
-    loadIgloo();
 }
 
 void Game::playGame()
@@ -94,7 +93,7 @@ void Game::playGame()
         player.movePlayer();
         player.drawInWindow(window);
         checkLanded();
-        drawIgloo();
+        igloo.drawIgloo(window);
         scoreText.setString(to_string(score));
         window.draw(scoreText);
         window.display();                                               //Display the current frame.
@@ -133,9 +132,9 @@ void Game::checkLanded()                                                        
         player.setLanded(true);                                                   //If there is a collision, set the landed state to true.
         player.setFloorMomentum(2*pow(-1,state));
         //iceLevels.loadOneRowTexture("landOnIceBlock.png", state);
-        bool initialLanding = (!iceLevels.getActive(state));
-        score+=(initialLanding*100);
-        if(initialLanding&&iglooStage<16){iglooStage++;};
+        bool initialLanding = (!iceLevels.getActive(state));                      //If first time landed on block
+        score+=(initialLanding*10);
+        if(initialLanding&&igloo.getStage()<16){igloo.incrementStage();};
         iceLevels.setActive(state);
     }
     else
@@ -151,39 +150,4 @@ void Game::loadFont()
     scoreText.setFont(scoreFont);
     scoreText.setCharacterSize(24);
     scoreText.setFillColor(sf::Color::Red);
-}
-
-void Game::loadIgloo()
-{
-    for(int i=0;i<12;i++)
-    {
-        sf::RectangleShape iglooPart(sf::Vector2f(50,20));
-        iglooPart.setPosition(sf::Vector2f(500+((i%4)*50),120-(int(i/4))*20));
-        iglooPart.setFillColor(sf::Color(125,125,125));
-        iglooPieces.push_back(iglooPart);
-    }
-    for(int j=0;j<2;j++)
-    {
-        sf::RectangleShape iglooPart(sf::Vector2f(50,20));
-        iglooPart.setPosition(sf::Vector2f(550+(50*j),60));
-        iglooPart.setFillColor(sf::Color(125,125,125));
-        iglooPieces.push_back(iglooPart);
-    }
-    sf::RectangleShape iglooPart(sf::Vector2f(50,20));
-    iglooPart.setPosition(sf::Vector2f(575,40));
-    iglooPart.setFillColor(sf::Color(125,125,125));
-    iglooPieces.push_back(iglooPart);
-    sf::RectangleShape iglooDoor(sf::Vector2f(50,40));
-    iglooDoor.setPosition(sf::Vector2f(575,100));
-    iglooDoor.setFillColor(sf::Color(0,0,0));
-    iglooPieces.push_back(iglooDoor);
-}
-
-void Game::drawIgloo()
-{
-    for(int i=0;i<iglooStage;i++)
-    {
-        sf::RectangleShape piece = iglooPieces[i];
-        window.draw(piece);
-    }
 }
