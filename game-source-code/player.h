@@ -30,6 +30,7 @@ class Player : public Entity
         int lives;
         sf::Font playerFont;
         sf::Text playerText;
+        bool rightFacing = true;
 };
 
 #endif // PLAYER_H

@@ -19,6 +19,7 @@ public:
     void loadTexture(sf::Texture &texture, string name);
     float getXPosition(){return xPosition;};                   //Getter for testing purposes.
     float getYPosition(){return yPosition;};                   //Getter for testing purposes.
+    sf::FloatRect getBounds(){return sprite.getGlobalBounds();};
 protected:
     sf::Sprite sprite;   //sprite initialized.
     float xPosition;    //Store xPosition

@@ -34,12 +34,19 @@ void Ice::changePosition(float x, float y)  //function to set the position of th
     sprite.setPosition(sf::Vector2f(x,y));  //move the sprite to the new position.
 }
 // improve later!!!!!!
-bool Ice::findCollision(float x, float y) //find whether the Ice block is colliding with the given co-ordinates.
+bool Ice::findCollision(float x, float y, Entity entity) //find whether the Ice block is colliding with the given co-ordinates.
 {
     //If the given co-ordinates are contained within the bounded rectangle of the Ice Block, then return true, else false.
-    if((x+32)>=xPosition+10 && x<=(xPosition+86) && (y+36)>=yPosition && (y+36)<=(yPosition+20))
+    sf::FloatRect boundingBox1 = sprite.getGlobalBounds();
+    boundingBox1.width-=20;
+    boundingBox1.left+=20;
+    sf::FloatRect boundingBox2 = entity.getBounds();
+    if(boundingBox1.intersects(boundingBox2))
     {
         return true;
     }
-    return false;
+    else
+    {
+        return false;
+    }
 }

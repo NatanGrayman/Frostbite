@@ -39,10 +39,17 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
         if(key==sf::Keyboard::Left)                         //If left key was pressed, set movement of player left.
         {
             xMomentum=-5;
+            sprite.setScale(-1,1);
+            xPosition+=(rightFacing*32);
+            rightFacing=false;
+
         }
         if(key==sf::Keyboard::Right)                       //If right key was pressed, set movement of player right.
         {
             xMomentum=5;
+            sprite.setScale(1,1);
+            xPosition-=(!rightFacing*32);
+            rightFacing=true;
         }
     }
     else

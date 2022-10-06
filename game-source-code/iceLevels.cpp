@@ -4,7 +4,7 @@
 
 IceLevels::IceLevels()
 {
-     int iVelocity=2;   //variable to store the velocity that the Ice will move at.
+     int iVelocity=1;   //variable to store the velocity that the Ice will move at.
      for(int j=0;j<4; j++) //populate the iceLevels vector with (4) individual IceRows.
     {
         IceRow iceRow = IceRow(255+(j*70), iVelocity); //create an icerow with the initial velocity and a height - that is shifted down each iteration to create the different levels.
@@ -48,11 +48,11 @@ void IceLevels::loadOneRowTexture(/*sf::Texture& texture,*/ string name, int row
     iceLevels[rowNum].loadTexture(/*texture,*/ name);
 }
 
-int IceLevels::findCollision(float x, float y) //search for a collision of each Ice block with inputted co-ordinates.
+int IceLevels::findCollision(float x, float y, Entity entity) //search for a collision of each Ice block with inputted co-ordinates.
 {
     for(int j=0;j<4; j++) //loop through each IceRow in iceLevels,
     {
-        if(iceLevels[j].findCollision(x, y)) //search for a collision for the current IceRow.
+        if(iceLevels[j].findCollision(x, y, entity)) //search for a collision for the current IceRow.
         {
             loadOneRowTexture("landOnIceBlock.png", j);
             //activated[j] = true;
@@ -72,4 +72,5 @@ void IceLevels::resetActive()
             activated[j] = 0;
         }
     }
+
 }

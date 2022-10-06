@@ -134,11 +134,11 @@ void Game::createBackground()                 //Function to create the Backgroun
 void Game::checkLanded()                                                          //Check for whether the player landed on an Ice block.
 {
     if(!player.getGrounded()){player.setLanded(false); player.setFloorMomentum(0);iceLevels.resetActive();return;};//only check when on the ground.
-    int state = (iceLevels.findCollision(player.getXPosition(), player.getYPosition()));
+    int state = (iceLevels.findCollision(player.getXPosition(), player.getYPosition(), player));
     if(state>=0)                                                                  //Search for a collision of the players position within iceLevels.
     {
         player.setLanded(true);                                                   //If there is a collision, set the landed state to true.
-        player.setFloorMomentum(2*pow(-1,state));
+        player.setFloorMomentum(iceLevels.getMomentumOfRow(state));
         //iceLevels.loadOneRowTexture("landOnIceBlock.png", state);
         bool initialLanding = (!iceLevels.getActive(state));                      //If first time landed on block
         score.changeScore(initialLanding*10);
