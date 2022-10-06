@@ -59,14 +59,17 @@ void Game::loadAllTextures()
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
     iceLevels.loadTexture(/*iceTexture,*/ "iceBlock.png");       //add the ice block image as a texture
     score.loadFont();
+    temperature.loadFont();
 }
 
 void Game::playGame()
 {
     if(!start){return;};                                                //Check that user wants to play.
     window.setFramerateLimit(60);                                       //Set the frame limit to 60.
+
     while(window.isOpen())                                              //Loop as long as window is open
     {
+
         sf::Event event;                                                //Create an event object to monitor for inputs.
         while (window.pollEvent(event))                                 //For each event that occurs.
         {
@@ -97,6 +100,7 @@ void Game::playGame()
         igloo.drawIgloo(window, stage);
         score.drawScore(window);
         finished = int(stage/16);
+        temperature.drawTemperature(window);
         window.display();                                               //Display the current frame.
     }
 }

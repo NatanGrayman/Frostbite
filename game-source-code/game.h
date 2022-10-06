@@ -11,6 +11,7 @@
 #include <string>
 #include "igloo.h"
 #include "score.h"
+#include "temperature.h"
 class Game
 {
     public:
@@ -35,5 +36,6 @@ class Game
         Score score;
         int stage=0;
         bool finished = false;
+        Temperature temperature;
 };
 #endif // GAME_H
