@@ -7,6 +7,7 @@
 #include "iceRow.h"
 #include "iceLevels.h"
 #include <math.h>
+
 using namespace std;
 
 Game::Game()
