@@ -14,6 +14,18 @@ Player::Player(float xInitial, float yInitial)
 {
     xPosition = xInitial;
     yPosition = yInitial;
+    grounded=true;
+    ticks=0;
+    lives=3;
+}
+
+void Player::resetPlayer()
+{
+    xPosition = 300;
+    yPosition = 160;   //Setting the initial Position
+    grounded=true;
+    ticks=0;
+    lives=3;
 }
 
 Player::~Player()
@@ -86,13 +98,13 @@ void Player::movePlayer()                   //function to move player.
 
 void Player::checkXBoundary()
 {
-    if(xPosition>800-32)   //Check the horizontal boundary with the total width minus Bailey's width.
+    if(xPosition>800-(rightFacing*32))   //Check the horizontal boundary with the total width minus Bailey's width.
     {
-        xPosition=800-32;  //Ensure stays at boundary position.
+        xPosition=800-(rightFacing*32);  //Ensure stays at boundary position.
     }
-    else if(xPosition<=0)  //Check the leftmost horizontal boundary
+    else if(xPosition-(!rightFacing*32)<=0)  //Check the leftmost horizontal boundary
     {
-        xPosition=0;      //Set as 0 to ensure does not go out of bounds.
+        xPosition=0+(32*!rightFacing);      //Set as 0 to ensure does not go out of bounds.
     }
 }
 void Player::checkYBoundary()

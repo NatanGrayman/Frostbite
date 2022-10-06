@@ -17,6 +17,8 @@ class Player : public Entity
         void drawLives(sf::RenderWindow& window);
         void loadFont();
         bool checkDeath();
+        int getLives(){return lives;};
+        void resetPlayer();
     protected:
 
     private:

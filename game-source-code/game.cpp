@@ -61,16 +61,26 @@ void Game::loadAllTextures()
     iceLevels.loadTexture(/*iceTexture,*/ "iceBlock.png");       //add the ice block image as a texture
     score.loadFont();
     temperature.loadFont();
+    if(!textFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};
+    levelText.setFont(textFont);
+    levelText.setCharacterSize(22);
+    levelText.setPosition(sf::Vector2f(50,20));
+    levelText.setFillColor(sf::Color(132,148,255));
+    player.resetPlayer();
 }
 
 void Game::playGame()
 {
     if(!start){return;};                                                //Check that user wants to play.
     window.setFramerateLimit(60);                                       //Set the frame limit to 60.
-    alive =true;
+    alive = true;
+    levelText.setString("1");
     while(window.isOpen())                                              //Loop as long as window is open
     {
-
+        if(player.getLives()<0)
+        {
+            splashScreen();
+        }
         sf::Event event;                                                //Create an event object to monitor for inputs.
         while (window.pollEvent(event))                                 //For each event that occurs.
         {
@@ -104,6 +114,7 @@ void Game::playGame()
         score.drawScore(window);
         finished = int(stage/16);
         temperature.drawTemperature(window, alive);
+        window.draw(levelText);
         window.display();                                               //Display the current frame.
     }
 }
