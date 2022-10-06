@@ -12,6 +12,7 @@
 #include "igloo.h"
 #include "score.h"
 #include "temperature.h"
+#include "enemy.h"
 class Game
 {
     public:

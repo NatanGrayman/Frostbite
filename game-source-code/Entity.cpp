@@ -27,3 +27,18 @@ void Entity::loadTexture(sf::Texture &texture, string name)   //Member function 
     sprite.setTexture(texture);                       //Set the texture of the sprite.
     //sf::Vector2f scale=obj.getScale();
 }
+
+bool Entity::findCollision(Entity entity) //find whether the Ice block is colliding with the given co-ordinates.
+{
+    //If the given co-ordinates are contained within the bounded rectangle of the Ice Block, then return true, else false.
+    sf::FloatRect boundingBox1 = sprite.getGlobalBounds();
+    sf::FloatRect boundingBox2 = entity.getBounds();
+    if(boundingBox1.intersects(boundingBox2))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
