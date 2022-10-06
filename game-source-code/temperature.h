@@ -11,7 +11,7 @@ class Temperature
         Temperature();
         virtual ~Temperature();
         int getTimeRemaining(){return int(initialTemperature-int(clock.getElapsedTime().asSeconds()));};
-        void drawTemperature(sf::RenderWindow& window);
+        void drawTemperature(sf::RenderWindow& window, bool alive);
         void loadFont();
     protected:
 

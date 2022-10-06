@@ -37,5 +37,6 @@ class Game
         int stage=0;
         bool finished = false;
         Temperature temperature;
+        bool alive;
 };
 #endif // GAME_H

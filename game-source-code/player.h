@@ -14,6 +14,9 @@ class Player : public Entity
         bool getLanded(){return landed;};
         void setFloorMomentum(float x){floorMomentum=x;};
         bool getGrounded(){return grounded;};
+        void drawLives(sf::RenderWindow& window);
+        void loadFont();
+        bool checkDeath();
     protected:
 
     private:
@@ -24,6 +27,9 @@ class Player : public Entity
         bool landed;              //Variable that stores the state of whether the player has landed on an Ice block.
         float floorMomentum=0;    //Momentum of the floor that the player stands on to adjust momentum to that.
         void finishGame();
+        int lives;
+        sf::Font playerFont;
+        sf::Text playerText;
 };
 
 #endif // PLAYER_H

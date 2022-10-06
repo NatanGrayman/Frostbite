@@ -7,6 +7,7 @@ Player::Player()
     yPosition = 160;   //Setting the initial Position
     grounded=true;
     ticks=0;
+    lives=3;
 }
 
 Player::Player(float xInitial, float yInitial)
@@ -50,9 +51,14 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
     }
 }
 
+bool Player::checkDeath()
+{
+        if(grounded && !(landed || yPosition==160)){lives--;xPosition=300;yPosition=160; return false;};
+        return true;
+}
+
 void Player::movePlayer()                   //function to move player.
 {
-    if(grounded && !(landed || yPosition==160)){xPosition=300;yPosition=160;};
     if(!grounded)               //Check not grounded to set time in 'air'
     {
         ticks++;               //increase time in 'air'
@@ -98,4 +104,19 @@ void Player::checkYBoundary()
 void Player::finishGame()
 {
     cout<<"Player has won the game"<<endl;
+}
+
+void Player::loadFont()
+{
+    if(!playerFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};
+    playerText.setFont(playerFont);
+    playerText.setCharacterSize(22);
+    playerText.setPosition(sf::Vector2f(150,50));
+    playerText.setFillColor(sf::Color(132,148,255));
+}
+
+void Player::drawLives(sf::RenderWindow& window)
+{
+    playerText.setString(to_string(lives));
+    window.draw(playerText);
 }

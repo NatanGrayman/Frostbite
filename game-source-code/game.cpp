@@ -57,6 +57,7 @@ void Game::splashScreen()                                       //Function to co
 void Game::loadAllTextures()
 {
     player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
+    player.loadFont();
     iceLevels.loadTexture(/*iceTexture,*/ "iceBlock.png");       //add the ice block image as a texture
     score.loadFont();
     temperature.loadFont();
@@ -66,7 +67,7 @@ void Game::playGame()
 {
     if(!start){return;};                                                //Check that user wants to play.
     window.setFramerateLimit(60);                                       //Set the frame limit to 60.
-
+    alive =true;
     while(window.isOpen())                                              //Loop as long as window is open
     {
 
@@ -94,13 +95,15 @@ void Game::playGame()
         window.draw(background);                                        //draw the background sprite.
         iceLevels.movePosition();
         iceLevels.drawInWindow(window);
+        alive = player.checkDeath();
         player.movePlayer();
         player.drawInWindow(window);
+        player.drawLives(window);
         checkLanded();
         igloo.drawIgloo(window, stage);
         score.drawScore(window);
         finished = int(stage/16);
-        temperature.drawTemperature(window);
+        temperature.drawTemperature(window, alive);
         window.display();                                               //Display the current frame.
     }
 }
