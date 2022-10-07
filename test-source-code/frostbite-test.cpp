@@ -115,8 +115,8 @@ TEST_CASE("Checking collisions")
     Ice ice(2);                                              //Create ice and set a speed.
     sf::Texture playerTexture;
     sf::Texture iceTexture;
-    ice.loadTexture(iceTexture, "../game-source-code/resources/iceBlock.png");      //Load both textures, getting their dimensions
-    player.loadTexture(playerTexture, "../game-source-code/resources/bailey.png");
+    ice.loadTexture(iceTexture, "resources/iceBlock.png");      //Load both textures, getting their dimensions
+    player.loadTexture(playerTexture, "resources/bailey.png");
     ice.changePosition(300,440);                             //Set position, taking into account bailey's height,width.
     CHECK(ice.findCollision(player.getXPosition(), player.getYPosition(), player));  //Check collision is true.
 }
@@ -127,8 +127,8 @@ TEST_CASE("Checking collision in the iceRow")
     Player player(0,465);    //Initial position of player to where the icerow occurs
     player.movePosition();   //Move to Bailey's new position
     sf::Texture playerTexture;
-    iceRow.loadTexture("../game-source-code/resources/iceBlock.png");           //Load both textures, getting their dimensions
-    player.loadTexture(playerTexture, "../game-source-code/resources/bailey.png");
+    iceRow.loadTexture("resources/iceBlock.png");           //Load both textures, getting their dimensions
+    player.loadTexture(playerTexture, "resources/bailey.png");
     CHECK(iceRow.findCollision(player.getXPosition(), player.getYPosition(), player));  //Check collision is true.
 }
 
@@ -137,8 +137,8 @@ TEST_CASE("Testing Enemy Collision")
     Enemy enemy(215, 2);          //Set the enemy position.
     Player player(0,215);         //Set Player position
     sf::Texture playerTexture;
-    enemy.loadTexture("../game-source-code/resources/crab_1.png");              //Load both textures.
-    player.loadTexture(playerTexture, "../game-source-code/resources/bailey.png");
+    enemy.loadTexture("resources/crab_1.png");              //Load both textures.
+    player.loadTexture(playerTexture, "resources/bailey.png");
     CHECK(enemy.findCollision(player));         //Check colision.
 }
 TEST_CASE("Testing Score Functionality")

@@ -12,15 +12,15 @@ class Enemy
         Enemy(float level, int iVelocity);
         virtual ~Enemy();
         void drawInWindow(sf::RenderWindow &window, int frames); // function to render each enemy in the row to the window.
-        void loadTexture(string name); //load the ice block image to each ice block in the row.
+        void loadTexture(string name); //load the enemy image to each enemy block in the row.
         bool findCollision( Entity entity);
         int getMomentum(){return momentum;};
         void movePosition();
     protected:
 
     private:
-        vector<Entity> enemyRow; //create a vector of Ice objects to form the IceRow.
-        int num=3;          //number of ice blocks in a row.
+        vector<Entity> enemyRow; //create a vector of enemy objects to form the enemyRow.
+        int num=3;          //number of enemy blocks in a row.
         sf::Texture texture;
         int momentum;
         sf::Texture enemyTexture;//
