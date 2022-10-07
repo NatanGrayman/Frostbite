@@ -13,8 +13,9 @@ Enemy::~Enemy()
 {
 
 }
-void Enemy::drawInWindow(sf::RenderWindow &window)
+void Enemy::drawInWindow(sf::RenderWindow &window, int frames)
 {
+    loadTexture(crabs[int(frames/20)%6]);//
     for(int i=0;i<num; i++) //loop through each ice block in the vector,
     {
         enemyRow[i].drawInWindow(window); // draw the current ice block.

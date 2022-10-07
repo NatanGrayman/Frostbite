@@ -13,6 +13,8 @@ class Temperature
         int getTimeRemaining(){return int(initialTemperature-int(clock.getElapsedTime().asSeconds()));};
         void drawTemperature(sf::RenderWindow& window, bool alive);
         void loadFont();
+        void resetTemperature();
+        void enterIgloo(sf::RenderWindow& window, int second);
     protected:
 
     private:

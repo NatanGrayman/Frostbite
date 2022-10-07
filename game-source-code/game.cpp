@@ -79,8 +79,6 @@ void Game::playGame()
     stage=0;
 
     Enemy enemy(1, 2);//
-    sf::Texture enemyTexture;//
-    vector<string> crabs{"crab_1.png","crab_2.png","crab_3.png","crab_4.png","crab_5.png","crab_6.png" };
     int img = 0;
     while(window.isOpen())                                              //Loop as long as window is open
     {
@@ -114,6 +112,7 @@ void Game::playGame()
         iceLevels.drawInWindow(window);
         alive = player.checkDeath();
         player.movePlayer(enemy.findCollision(player));
+        if(player.getGameWon()){finishGame();};
         player.drawInWindow(window);
         player.drawLives(window);
         checkLanded();
@@ -124,9 +123,8 @@ void Game::playGame()
         temperature.drawTemperature(window, alive);
         window.draw(levelText);
         enemy.movePosition();//
-        enemy.loadTexture(crabs[int(img/20)%6]);//
+        enemy.drawInWindow(window,img);//
         img++;
-        enemy.drawInWindow(window);//
         window.display();                                               //Display the current frame.
     }
 }
@@ -164,7 +162,7 @@ void Game::checkLanded()                                                        
         player.setFloorMomentum(iceLevels.getMomentumOfRow(state));
         //iceLevels.loadOneRowTexture("landOnIceBlock.png", state);
         bool initialLanding = (!iceLevels.getActive(state));                      //If first time landed on block
-        score.changeScore(initialLanding*10);
+        score.changeScore(initialLanding*scoreIncrement);
         if(initialLanding&&stage<16){stage++;};
         iceLevels.setActive(state);
     }
@@ -173,4 +171,34 @@ void Game::checkLanded()                                                        
         player.setLanded(false);                                                  //Otherwise set the landed state to false.
         player.setFloorMomentum(0);
     }
+}
+
+void Game::finishGame()
+{
+    int frame=0;
+    const int extraTime = temperature.getTimeRemaining();
+    int timeRemaining = extraTime;
+    while(stage>0)                                              //Loop as long as window is open
+    {
+        window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
+        window.draw(background);                                        //draw the background sprite.
+        iceLevels.movePosition();
+        iceLevels.drawInWindow(window);
+        player.drawInWindow(window);
+        player.drawLives(window);
+        timeRemaining-=(((frame%int(160/extraTime))==0)&&timeRemaining>0);
+        score.changeScore(scoreIncrement*(((frame%int(160/extraTime))==0)&&timeRemaining>0));
+        temperature.enterIgloo(window, timeRemaining);
+        stage-=(frame%10==0);
+        score.changeScore((scoreIncrement*(frame%10==0)));
+        igloo.drawIgloo(window, stage);
+        score.drawScore(window);
+        window.draw(levelText);
+        window.display();
+        frame++;
+    }
+    levelText.setString(to_string(++levelNumber));
+    scoreIncrement+=10;
+    temperature.resetTemperature();
+    player.resetPlayer();
 }

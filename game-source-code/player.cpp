@@ -24,6 +24,7 @@ void Player::resetPlayer()
     xPosition = 300;
     yPosition = 160;   //Setting the initial Position
     grounded=true;
+    gameWon=false;
     ticks=0;
     lives=3;
 }
@@ -130,6 +131,7 @@ void Player::checkYBoundary()
 
 void Player::finishGame()
 {
+    gameWon = true;
     cout<<"Player has won the game"<<endl;
 }
 

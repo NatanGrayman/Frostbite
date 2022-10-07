@@ -25,3 +25,14 @@ void Temperature::drawTemperature(sf::RenderWindow& window, bool alive)
     temperatureText.setString(to_string(getTimeRemaining()));
     window.draw(temperatureText);
 }
+
+void Temperature::resetTemperature()
+{
+  clock.restart();
+}
+
+void Temperature::enterIgloo(sf::RenderWindow& window, int seconds)
+{
+    temperatureText.setString(to_string(seconds));
+    window.draw(temperatureText);
+}

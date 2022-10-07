@@ -34,11 +34,14 @@ class Game
         void checkLanded();
         Igloo igloo;
         Score score;
+        int scoreIncrement=10;
         int stage=0;
         bool finished = false;
         Temperature temperature;
         bool alive;
         sf::Font textFont;
+        int levelNumber=1;
         sf::Text levelText;
+        void finishGame();
 };
 #endif // GAME_H

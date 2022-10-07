@@ -20,6 +20,7 @@ class Player : public Entity
         bool checkDeath();
         int getLives(){return lives;};
         void resetPlayer();
+        bool getGameWon(){return gameWon;};
     protected:
 
     private:
@@ -34,6 +35,7 @@ class Player : public Entity
         sf::Font playerFont;
         sf::Text playerText;
         bool rightFacing = true;
+        bool gameWon = false;
 };
 
 #endif // PLAYER_H
