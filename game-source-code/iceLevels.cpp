@@ -55,7 +55,6 @@ int IceLevels::findCollision(float x, float y, Entity entity) //search for a col
         if(iceLevels[j].findCollision(x, y, entity)) //search for a collision for the current IceRow.
         {
             loadOneRowTexture("landOnIceBlock.png", j);
-            //activated[j] = true;
             if(count(activated.begin(), activated.end(), 1) == 4){loadTexture("iceBlock.png");};
             return j;                    //If a collision is found, return true.
         }
@@ -63,7 +62,7 @@ int IceLevels::findCollision(float x, float y, Entity entity) //search for a col
     return -1;                           //Otherwise return false.
 }
 
-void IceLevels::resetActive()
+void IceLevels::resetActive() // reset the state of each row of iceBlocks.
 {
     if(count(activated.begin(), activated.end(), 1) == 4)
     {

@@ -14,14 +14,14 @@ Score::~Score()
 
 void Score::loadFont()
 {
-    if(!scoreFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};
+    if(!scoreFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};  //Loading the font for score
     scoreText.setFont(scoreFont);
     scoreText.setCharacterSize(22);
     scoreText.setPosition(sf::Vector2f(150,20));
     scoreText.setFillColor(sf::Color(132,148,255));
 }
 
-void Score::drawScore(sf::RenderWindow& window)
+void Score::drawScore(sf::RenderWindow& window)   //method to draw the score
 {
         scoreText.setString(to_string(scoreCount));
         window.draw(scoreText);

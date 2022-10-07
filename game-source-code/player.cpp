@@ -3,14 +3,14 @@
 
 Player::Player()
 {
-    xPosition = 300;
+    xPosition = 300;   //Setting the initial Position;
     yPosition = 160;   //Setting the initial Position
-    grounded=true;
-    ticks=0;
-    lives=3;
+    grounded=true;     //Bailey starts off grounded
+    ticks=0;           //Bailey has not been in the air
+    lives=3;           //Bailey starts with 3 lives
 }
 
-Player::Player(float xInitial, float yInitial)
+Player::Player(float xInitial, float yInitial)  //Created for testing purposes
 {
     xPosition = xInitial;
     yPosition = yInitial;
@@ -21,8 +21,9 @@ Player::Player(float xInitial, float yInitial)
 
 void Player::resetPlayer()
 {
+    //Restart the initial game settings.
     xPosition = 300;
-    yPosition = 160;   //Setting the initial Position
+    yPosition = 160;
     grounded=true;
     gameWon=false;
     ticks=0;
@@ -52,16 +53,16 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
         if(key==sf::Keyboard::Left)                         //If left key was pressed, set movement of player left.
         {
             xMomentum=-5;
-            sprite.setScale(-1,1);
-            xPosition+=(rightFacing*32);
+            sprite.setScale(-1,1);                         //Flip Bailey , to face right, when click left.
+            xPosition+=(rightFacing*32);                   //If rightfacing (1 or 0) then add width bailey, to adjust for mirroring
             rightFacing=false;
 
         }
         if(key==sf::Keyboard::Right)                       //If right key was pressed, set movement of player right.
         {
             xMomentum=5;
-            sprite.setScale(1,1);
-            xPosition-=(!rightFacing*32);
+            sprite.setScale(1,1);                          //Scale Bailey.
+            xPosition-=(!rightFacing*32);                  //If rightfacing (1 or 0) then add width bailey, to adjust for mirroring
             rightFacing=true;
         }
     }
@@ -71,13 +72,14 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
     }
 }
 
-bool Player::checkDeath()
+bool Player::checkDeath() //Method to check if player dies, ie hits the 'water'.
 {
+       //if you grounded, IE: not in the air, and you are not either landed on an iceBlock or in the safe zone (y=160) then the player is in the water and dies.
         if(grounded && !(landed || yPosition==160)){lives--;xPosition=300;yPosition=160; return false;};
         return true;
 }
 
-void Player::die()
+void Player::freezeDeath()  //Method to check if temperature runs out.
 {
     lives--;
     xPosition=300;
@@ -96,12 +98,13 @@ void Player::movePlayer(bool enemyCollision)                   //function to mov
         yMomentum=0;           //Stop vertical movement
         ticks=0;               //Reset airtime count
     }
+    //if the player has collided with an enemy, movement is disabled. Unless mid-jump in which case the jump is completed.
     if(enemyCollision){xMomentum=0; floorMomentum=2; if(landed){yMomentum=0;}};
     xPosition+=xMomentum;     //Change the horizontal position of the player
     xPosition+=floorMomentum; //add the momentum of the floor to the players position
-    checkXBoundary();
+    checkXBoundary();         //check the screen boundaries
     yPosition+=yMomentum;     //Change the vertical position of the player
-    checkYBoundary();
+    checkYBoundary();         //check the screen boundaries
     positionUpdate();         //Now update the position of sprite.
 }
 
@@ -129,7 +132,7 @@ void Player::checkYBoundary()
     }
 }
 
-void Player::finishGame()
+void Player::finishGame() // function when player wins the game/level.
 {
     gameWon = true;
     cout<<"Player has won the game"<<endl;
@@ -144,7 +147,7 @@ void Player::loadFont()
     playerText.setFillColor(sf::Color(132,148,255));
 }
 
-void Player::drawLives(sf::RenderWindow& window)
+void Player::drawLives(sf::RenderWindow& window) // draw the remaining lives of the player.
 {
     playerText.setString(to_string(lives));
     window.draw(playerText);

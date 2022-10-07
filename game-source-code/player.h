@@ -16,7 +16,7 @@ class Player : public Entity
         bool getGrounded(){return grounded;};
         void drawLives(sf::RenderWindow& window);
         void loadFont();
-        void die();
+        void freezeDeath() ;
         bool checkDeath();
         int getLives(){return lives;};
         void resetPlayer();

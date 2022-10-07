@@ -37,11 +37,11 @@ void Ice::changePosition(float x, float y)  //function to set the position of th
 bool Ice::findCollision(float x, float y, Entity entity) //find whether the Ice block is colliding with the given co-ordinates.
 {
     //If the given co-ordinates are contained within the bounded rectangle of the Ice Block, then return true, else false.
-    sf::FloatRect boundingBox1 = sprite.getGlobalBounds();
-    boundingBox1.width-=30;
+    sf::FloatRect boundingBox1 = sprite.getGlobalBounds(); // get the bounding box of the object
+    boundingBox1.width-=30; // adjust to create better borders for the object
     boundingBox1.left+=20;
-    sf::FloatRect boundingBox2 = entity.getBounds();
-    if(boundingBox1.intersects(boundingBox2))
+    sf::FloatRect boundingBox2 = entity.getBounds(); //get the bounding box of the player or other entity
+    if(boundingBox1.intersects(boundingBox2)) //check for a collision.
     {
         return true;
     }

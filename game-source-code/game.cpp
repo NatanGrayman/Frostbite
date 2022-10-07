@@ -119,7 +119,7 @@ void Game::playGame()
         igloo.drawIgloo(window, stage);
         score.drawScore(window);
         finished = int(stage/16);
-        if(temperature.getTimeRemaining()<=0){player.die();alive=false;}
+        if(temperature.getTimeRemaining()<=0){player.freezeDeath();alive=false;}
         temperature.drawTemperature(window, alive);
         window.draw(levelText);
         enemy.movePosition();//
