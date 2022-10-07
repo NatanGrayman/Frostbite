@@ -62,9 +62,9 @@ int IceLevels::findCollision(float x, float y, Entity entity) //search for a col
     return -1;                           //Otherwise return false.
 }
 
-void IceLevels::resetActive() // reset the state of each row of iceBlocks.
+void IceLevels::resetActive(bool begin) // reset the state of each row of iceBlocks.
 {
-    if(count(activated.begin(), activated.end(), 1) == 4)
+    if(count(activated.begin(), activated.end(), 1) == 4 ||begin)
     {
         for(int j=0;j<4;j++)
         {

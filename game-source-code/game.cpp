@@ -66,7 +66,11 @@ void Game::loadAllTextures()
     levelText.setCharacterSize(22);
     levelText.setPosition(sf::Vector2f(50,20));
     levelText.setFillColor(sf::Color(132,148,255));
-    player.resetPlayer(); //Reset the players properties.
+    player.resetPlayer(true); //Reset the players properties.
+    score.resetScore();
+    iceLevels.resetActive(true);
+    scoreIncrement=10;
+    levelNumber=1;
 }
 
 void Game::playGame()
@@ -198,5 +202,5 @@ void Game::finishGame()
     levelText.setString(to_string(++levelNumber));                                         //increase the level number showing the next level has started.
     scoreIncrement+=10;                                                                     //each level the points per block is increased by 10.
     temperature.resetTemperature();                                                         //reset the temperature for the new level.
-    player.resetPlayer();                                                                   //reset the players state for the new level.
+    player.resetPlayer(false);                                                                   //reset the players state for the new level.
 }

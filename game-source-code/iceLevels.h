@@ -13,7 +13,7 @@ class IceLevels
         void loadTexture(/*sf::Texture& texture,*/ string name); //load the texture for each element of Ice.
         void loadOneRowTexture(/*sf::Texture& texture,*/ string name, int rowNum); //load the texture for a specific row of Ice.
         int findCollision(float x, float y, Entity entity);
-        void resetActive();
+        void resetActive(bool begin=false);
         bool getActive(int n){return activated[n];};
         void setActive(int n){activated[n]=true;};
         int getMomentumOfRow(int rowNumber){return iceLevels[rowNumber].getMomentum();};

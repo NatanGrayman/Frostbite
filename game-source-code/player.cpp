@@ -19,7 +19,7 @@ Player::Player(float xInitial, float yInitial)  //Created for testing purposes
     lives=3;
 }
 
-void Player::resetPlayer()
+void Player::resetPlayer(bool life)
 {
     //Restart the initial game settings.
     xPosition = 300;
@@ -27,6 +27,7 @@ void Player::resetPlayer()
     grounded=true;
     gameWon=false;
     ticks=0;
+    if(life){lives=3;};
 }
 
 Player::~Player()

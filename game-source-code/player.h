@@ -19,7 +19,7 @@ class Player : public Entity
         void freezeDeath() ;
         bool checkDeath();
         int getLives(){return lives;};
-        void resetPlayer();
+        void resetPlayer(bool life);
         bool getGameWon(){return gameWon;};
     protected:
 
