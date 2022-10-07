@@ -59,30 +59,30 @@ void Game::loadAllTextures()
     player.loadTexture(baileyTexture, "resources/bailey.png");   // add the bailey image as a texture
     player.loadFont();
     iceLevels.loadTexture(/*iceTexture,*/ "resources/iceBlock.png");       //add the ice block image as a texture
-    score.loadFont();
-    temperature.loadFont();
+    score.loadFont();                                                       //load the scores font.
+    temperature.loadFont();                                                 //load the temperature font.
     if(!textFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};
     levelText.setFont(textFont);
     levelText.setCharacterSize(22);
     levelText.setPosition(sf::Vector2f(50,20));
     levelText.setFillColor(sf::Color(132,148,255));
-    player.resetPlayer();
+    player.resetPlayer(); //Reset the players properties.
 }
 
 void Game::playGame()
 {
     if(!start){return;};                                                //Check that user wants to play.
     window.setFramerateLimit(60);                                       //Set the frame limit to 60.
-    alive = true;
-    levelText.setString("1");
-    score.resetScore();
+    alive = true;                                                       //The player starts the game alive
+    levelText.setString(to_string(levelNumber));                        //display the current level number.
+    score.resetScore();                                                 //reset the score.
     stage=0;
 
-    Enemy enemy(1, 2);//
-    int img = 0;
+    Enemy enemy(1, 2);                                                  //create a row of enemies.
+    int frameShown = 0;                                                 //variable to store how many frames have been shown, allows animations.
     while(window.isOpen())                                              //Loop as long as window is open
     {
-        if(player.getLives()<0)
+        if(player.getLives()<0)                                         //if the player loses the game and has no lives, return to the splash screen.
         {
             splashScreen();
         }
@@ -108,23 +108,23 @@ void Game::playGame()
         }
         window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
-        iceLevels.movePosition();
-        iceLevels.drawInWindow(window);
-        alive = player.checkDeath();
-        player.movePlayer(enemy.findCollision(player));
-        if(player.getGameWon()){finishGame();};
-        player.drawInWindow(window);
-        player.drawLives(window);
-        checkLanded();
-        igloo.drawIgloo(window, stage);
-        score.drawScore(window);
-        finished = int(stage/16);
-        if(temperature.getTimeRemaining()<=0){player.freezeDeath();alive=false;}
-        temperature.drawTemperature(window, alive);
-        window.draw(levelText);
-        enemy.movePosition();//
-        enemy.drawInWindow(window,img);//
-        img++;
+        iceLevels.movePosition();                                       //move the iceBlocks.
+        iceLevels.drawInWindow(window);                                 //draw the iceBlocks.
+        alive = player.checkDeath();                                    //check if the player has died, by falling into water.
+        player.movePlayer(enemy.findCollision(player));                 //move the player, pass in whether he is collided with an enemy.
+        if(player.getGameWon()){finishGame();};                         //if the player has won the game and entered the igloo, process the animations.
+        player.drawInWindow(window);                                    // draw the player.
+        player.drawLives(window);                                       //draw the lives remaining
+        checkLanded();                                                  //check if the player has landed on the blocks.
+        igloo.drawIgloo(window, stage);                                 //draw the current stage of the igloo.
+        score.drawScore(window);                                        //display the score.
+        finished = int(stage/16);                                       //if the player has collected 16 ice blocks, he is 'finished' and can win the game.
+        if(temperature.getTimeRemaining()<=0){player.freezeDeath();alive=false;}    //if the temperature is below 0, the player freezes and dies.
+        temperature.drawTemperature(window, alive);                     //display the temperature.
+        window.draw(levelText);                                         //draw the current level number.
+        enemy.movePosition();                                           //move the enemies
+        enemy.drawInWindow(window,frameShown);                          //draw and animate the enemies movement.
+        frameShown++;
         window.display();                                               //Display the current frame.
     }
 }
@@ -159,23 +159,22 @@ void Game::checkLanded()                                                        
     if(state>=0)                                                                  //Search for a collision of the players position within iceLevels.
     {
         player.setLanded(true);                                                   //If there is a collision, set the landed state to true.
-        player.setFloorMomentum(iceLevels.getMomentumOfRow(state));
-        //iceLevels.loadOneRowTexture("landOnIceBlock.png", state);
+        player.setFloorMomentum(iceLevels.getMomentumOfRow(state));               // add the momentum of the floor to the players.
         bool initialLanding = (!iceLevels.getActive(state));                      //If first time landed on block
-        score.changeScore(initialLanding*scoreIncrement);
-        if(initialLanding&&stage<16){stage++;};
+        score.changeScore(initialLanding*scoreIncrement);                         //increase the players score
+        if(initialLanding&&stage<16){stage++;};                                   //add an extra piece to the igloo
         iceLevels.setActive(state);
     }
     else
     {
         player.setLanded(false);                                                  //Otherwise set the landed state to false.
-        player.setFloorMomentum(0);
+        player.setFloorMomentum(0);                                               // set his floor momentum to 0;
     }
 }
 
 void Game::finishGame()
 {
-    int frame=0;
+    int frame=0;                                                //frames used to animate winning process
     const int extraTime = temperature.getTimeRemaining();
     int timeRemaining = extraTime;
     while(stage>0)                                              //Loop as long as window is open
@@ -184,21 +183,20 @@ void Game::finishGame()
         window.draw(background);                                        //draw the background sprite.
         iceLevels.movePosition();
         iceLevels.drawInWindow(window);
-        player.drawInWindow(window);
         player.drawLives(window);
-        timeRemaining-=(((frame%int(160/extraTime))==0)&&timeRemaining>0);
-        score.changeScore(scoreIncrement*(((frame%int(160/extraTime))==0)&&timeRemaining>0));
-        temperature.enterIgloo(window, timeRemaining);
-        stage-=(frame%10==0);
-        score.changeScore((scoreIncrement*(frame%10==0)));
+        timeRemaining-=(((frame%int(160/extraTime))==0)&&timeRemaining>0);                  //decrease the time remaining faster than usual to rundown the clock.
+        score.changeScore(scoreIncrement*(((frame%int(160/extraTime))==0)&&timeRemaining>0));//increase the score by each extra second after winning
+        temperature.enterIgloo(window, timeRemaining);                                      //display the temperature animation when winning.
+        stage-=(frame%10==0);                                                               //decrease the stage to show the igloo disappearing.
+        score.changeScore((scoreIncrement*(frame%10==0)));                                  //increase the score for each block of the igloo.
         igloo.drawIgloo(window, stage);
         score.drawScore(window);
         window.draw(levelText);
         window.display();
         frame++;
     }
-    levelText.setString(to_string(++levelNumber));
-    scoreIncrement+=10;
-    temperature.resetTemperature();
-    player.resetPlayer();
+    levelText.setString(to_string(++levelNumber));                                         //increase the level number showing the next level has started.
+    scoreIncrement+=10;                                                                     //each level the points per block is increased by 10.
+    temperature.resetTemperature();                                                         //reset the temperature for the new level.
+    player.resetPlayer();                                                                   //reset the players state for the new level.
 }

@@ -30,7 +30,7 @@ class Game
         Player player;           //Create player object
         sf::Texture baileyTexture;  //Create Bailey as a texture
         IceLevels iceLevels;         //Pass in the initial velocity to the iceblock
-        void loadAllTextures();
+        void loadAllTextures();     //At the start of the game, all Textures are loaded
         void checkLanded();
         Igloo igloo;
         Score score;

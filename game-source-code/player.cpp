@@ -27,7 +27,6 @@ void Player::resetPlayer()
     grounded=true;
     gameWon=false;
     ticks=0;
-    lives=3;
 }
 
 Player::~Player()
