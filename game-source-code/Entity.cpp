@@ -26,7 +26,7 @@ void Entity::movePosition()   //Member function to move the iceBlock
 
 void Entity::loadTexture(sf::Texture &texture, string name)   //Member function to load any texture, passing in its name.
 {
-    if (!texture.loadFromFile("resources/" +name))  //load from file specific texture.
+    if (!texture.loadFromFile(name))  //load from file specific texture.
     {
         cout<<"Error in loading texture";          //Error message if does not load
     }

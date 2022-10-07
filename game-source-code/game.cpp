@@ -56,9 +56,9 @@ void Game::splashScreen()                                       //Function to co
 
 void Game::loadAllTextures()
 {
-    player.loadTexture(baileyTexture, "bailey.png");   // add the bailey image as a texture
+    player.loadTexture(baileyTexture, "resources/bailey.png");   // add the bailey image as a texture
     player.loadFont();
-    iceLevels.loadTexture(/*iceTexture,*/ "iceBlock.png");       //add the ice block image as a texture
+    iceLevels.loadTexture(/*iceTexture,*/ "resources/iceBlock.png");       //add the ice block image as a texture
     score.loadFont();
     temperature.loadFont();
     if(!textFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};

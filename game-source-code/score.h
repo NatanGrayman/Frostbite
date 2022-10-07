@@ -13,6 +13,7 @@ class Score
         void loadFont();
         void changeScore(int difference){scoreCount+=difference;};
         void resetScore(){scoreCount=0;};
+        int getScore(){return scoreCount;};
     protected:
 
     private:

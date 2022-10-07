@@ -1,9 +1,14 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
+#include "synchapi.h"
 #include "../game-source-code/game.h"
 #include "../game-source-code/player.h"
 #include "../game-source-code/ice.h"
 #include "../game-source-code/icerow.h"
+#include "../game-source-code/igloo.h"
+#include "../game-source-code/score.h"
+#include "../game-source-code/enemy.h"
+#include "../game-source-code/temperature.h"
 
 TEST_CASE("Testing the game window")
 {
@@ -24,11 +29,11 @@ TEST_CASE("Testing Left and Right Movement of Player")
 {
     Player player;                                      //Player object
     player.processEvents(sf::Keyboard::Right, true,false);    //Pass into processEvents loops the specific testing movement and simulating as pressed.
-    player.movePlayer();                                //Move the player
+    player.movePlayer(false);                                //Move the player
     CHECK(player.getXPosition()==305);                  //Check the new position is as expected
 
     player.processEvents(sf::Keyboard::Left, true,false);     //Pass into processEvents loops the specific testing movement and simulating as pressed.
-    player.movePlayer();                                //Move the player
+    player.movePlayer(false);                                //Move the player
     CHECK(player.getXPosition()==332);                  //Check the new position is as expected
 }
 
@@ -36,7 +41,7 @@ TEST_CASE("Testing Player Down movement")
 {
     Player player;                                   //Player object
     player.processEvents(sf::Keyboard::Down, true,false);  //Pass into processEvents loops the specific testing movement and simulating as pressed.
-    player.movePlayer();                             //Move the player
+    player.movePlayer(false);                             //Move the player
     CHECK(player.getYPosition()==165);               //Check the new position is as expected
 }
 
@@ -44,7 +49,7 @@ TEST_CASE("Testing Player Upwards movement")
 {
     Player player(300,200);                                  //Player object
     player.processEvents(sf::Keyboard::Up, true,false);   //Pass into processEvents loops the specific testing movement and simulating as pressed.
-    player.movePlayer();                            //Move the player
+    player.movePlayer(false);                            //Move the player
     CHECK(player.getYPosition()==195);              //Check the new position is as expected
 }
 
@@ -82,12 +87,12 @@ TEST_CASE("Testing Player Vertical Boundary")
 {
     Player player(300, 160);                         //Player object initialized at highest position.
     player.processEvents(sf::Keyboard::Up, true,false);   //Pass into processEvents loops the specific testing movement and simulating as pressed.
-    player.movePlayer();                            //Move the player
+    player.movePlayer(false);                            //Move the player
     CHECK(player.getYPosition()==160);              //Check at same max vertical position, due to boundary.
 
     Player player2(300,440);
     player2.processEvents(sf::Keyboard::Down, true,false);  //Pass into processEvents loops the specific testing movement and simulating as pressed.
-    player2.movePlayer();                             //Move the player.
+    player2.movePlayer(false);                             //Move the player.
     CHECK(player2.getYPosition()==440);              //Check at same minumum vertical position, due to boundary.
 }
 
@@ -95,27 +100,63 @@ TEST_CASE("Testing Player Horizontal Boundary")
 {
     Player player(800-32,160);                         //Set at rightmost xPosition (window width-bailey width).
     player.processEvents(sf::Keyboard::Right, true,false);   //Pass into processEvents loops the specific testing movement and simulating as pressed.
-    player.movePlayer();                               //Move the player
+    player.movePlayer(false);                               //Move the player
     CHECK(player.getXPosition()==800-32);              //Check at same rightmost horizontal position, due to boundary.
 
     Player player2(0,160);                             //Set at leftmost xPosition.
     player2.processEvents(sf::Keyboard::Left, true,false);   //Pass into processEvents loops the specific testing movement and simulating as pressed.
-    player2.movePlayer();                               //Move the player
-    CHECK(player2.getXPosition()==27);                  //Check at same leftmost horizontal position, due to boundary.
+    player2.movePlayer(false);                               //Move the player
+    CHECK(player2.getXPosition()==32);                  //Check at same leftmost horizontal position, due to boundary.
 }
 TEST_CASE("Checking collisions")
 {
-    Player player(300,440);                                  //Move the player to position for testing purposes
+    Player player(300,440);                                  //Set the player to position for testing purposes.
+    player.movePosition();                                   //Move player to that Position.
     Ice ice(2);                                              //Create ice and set a speed.
+    sf::Texture playerTexture;
+    sf::Texture iceTexture;
+    ice.loadTexture(iceTexture, "../game-source-code/resources/iceBlock.png");      //Load both textures, getting their dimensions
+    player.loadTexture(playerTexture, "../game-source-code/resources/bailey.png");
     ice.changePosition(300,440);                             //Set position, taking into account bailey's height,width.
-    player.movePlayer();
-    CHECK(ice.getBounds()==player.getBounds());
-    //CHECK(ice.findCollision(player.getXPosition(), player.getYPosition(), player));  //Check collision is true.
+    CHECK(ice.findCollision(player.getXPosition(), player.getYPosition(), player));  //Check collision is true.
 }
-/*TEST_CASE("Checking collision in the iceRow")
-{
-    IceRow icerow(465,2);    //Set the icerow position
-    Player player(0,440);    //Move the player to where the icerow occurs
-    CHECK(icerow.findCollision(player.getXPosition(), player.getYPosition(), player));  //Check collision is true.
-} */
 
+TEST_CASE("Checking collision in the iceRow")
+{
+    IceRow iceRow(465,2);    //Set the icerow position
+    Player player(0,465);    //Initial position of player to where the icerow occurs
+    player.movePosition();   //Move to Bailey's new position
+    sf::Texture playerTexture;
+    iceRow.loadTexture("../game-source-code/resources/iceBlock.png");           //Load both textures, getting their dimensions
+    player.loadTexture(playerTexture, "../game-source-code/resources/bailey.png");
+    CHECK(iceRow.findCollision(player.getXPosition(), player.getYPosition(), player));  //Check collision is true.
+}
+
+TEST_CASE("Testing Enemy Collision")
+{
+    Enemy enemy(215, 2);          //Set the enemy position.
+    Player player(0,215);         //Set Player position
+    sf::Texture playerTexture;
+    enemy.loadTexture("../game-source-code/resources/crab_1.png");              //Load both textures.
+    player.loadTexture(playerTexture, "../game-source-code/resources/bailey.png");
+    CHECK(enemy.findCollision(player));         //Check colision.
+}
+TEST_CASE("Testing Score Functionality")
+{
+    Score score;                    //Create a score.
+    score.changeScore(15);
+    CHECK(15==score.getScore());
+    score.changeScore(-5);          //Decrement the score.
+    CHECK(10==score.getScore());    //Check updated score.
+    score.resetScore();             //reset the score.
+    CHECK(0==score.getScore());     //Check the reseting functionality.
+}
+
+TEST_CASE("Testing Temperature Functionality")
+{
+    Temperature temperature;                    //Create a temperature.
+    Sleep(1000);                                //Set sleeping for 1 second
+    CHECK(temperature.getTimeRemaining() == 44);    //Check 1 second has passed
+    temperature.resetTemperature();                 //Reset the temperature
+    CHECK(temperature.getTimeRemaining()==45);     //Check resetting functionality
+}

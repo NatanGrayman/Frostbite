@@ -15,7 +15,7 @@ Enemy::~Enemy()
 }
 void Enemy::drawInWindow(sf::RenderWindow &window, int frames)
 {
-    loadTexture(crabs[int(frames/20)%6]);//load a new image for the crab every 20 frames, this creates the animation.
+    loadTexture("resources/" +crabs[int(frames/20)%6]);//load a new image for the crab every 20 frames, this creates the animation.
     for(int i=0;i<num; i++) //loop through each enemy block in the vector,
     {
         enemyRow[i].drawInWindow(window); // draw the current enemy block.
