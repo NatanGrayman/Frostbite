@@ -67,8 +67,6 @@ void Game::loadAllTextures()
     levelText.setPosition(sf::Vector2f(50,20));
     levelText.setFillColor(sf::Color(132,148,255));
     player.resetPlayer();
-    score.resetScore();
-    stage=0;
 }
 
 void Game::playGame()
@@ -77,6 +75,13 @@ void Game::playGame()
     window.setFramerateLimit(60);                                       //Set the frame limit to 60.
     alive = true;
     levelText.setString("1");
+    score.resetScore();
+    stage=0;
+
+    Enemy enemy(1, 2);//
+    sf::Texture enemyTexture;//
+    vector<string> crabs{"crab_1.png","crab_2.png","crab_3.png","crab_4.png","crab_5.png","crab_6.png" };
+    int img = 0;
     while(window.isOpen())                                              //Loop as long as window is open
     {
         if(player.getLives()<0)
@@ -108,15 +113,20 @@ void Game::playGame()
         iceLevels.movePosition();
         iceLevels.drawInWindow(window);
         alive = player.checkDeath();
-        player.movePlayer();
+        player.movePlayer(enemy.findCollision(player));
         player.drawInWindow(window);
         player.drawLives(window);
         checkLanded();
         igloo.drawIgloo(window, stage);
         score.drawScore(window);
         finished = int(stage/16);
+        if(temperature.getTimeRemaining()<=0){player.die();alive=false;}
         temperature.drawTemperature(window, alive);
         window.draw(levelText);
+        enemy.movePosition();//
+        enemy.loadTexture(crabs[int(img/20)%6]);//
+        img++;
+        enemy.drawInWindow(window);//
         window.display();                                               //Display the current frame.
     }
 }
@@ -164,4 +174,3 @@ void Game::checkLanded()                                                        
         player.setFloorMomentum(0);
     }
 }
-

@@ -22,6 +22,7 @@ public:
     float getYPosition(){return yPosition;};                   //Getter for testing purposes.
     sf::FloatRect getBounds(){return sprite.getGlobalBounds();};
     bool findCollision(Entity entity);
+    void movePosition();
 protected:
     sf::Sprite sprite;   //sprite initialized.
     float xPosition;    //Store xPosition

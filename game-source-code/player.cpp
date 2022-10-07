@@ -76,7 +76,14 @@ bool Player::checkDeath()
         return true;
 }
 
-void Player::movePlayer()                   //function to move player.
+void Player::die()
+{
+    lives--;
+    xPosition=300;
+    yPosition=160;
+}
+
+void Player::movePlayer(bool enemyCollision)                   //function to move player.
 {
     if(!grounded)               //Check not grounded to set time in 'air'
     {
@@ -88,6 +95,7 @@ void Player::movePlayer()                   //function to move player.
         yMomentum=0;           //Stop vertical movement
         ticks=0;               //Reset airtime count
     }
+    if(enemyCollision){xMomentum=0; floorMomentum=2; if(landed){yMomentum=0;}};
     xPosition+=xMomentum;     //Change the horizontal position of the player
     xPosition+=floorMomentum; //add the momentum of the floor to the players position
     checkXBoundary();

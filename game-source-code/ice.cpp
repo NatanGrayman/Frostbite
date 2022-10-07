@@ -38,7 +38,7 @@ bool Ice::findCollision(float x, float y, Entity entity) //find whether the Ice 
 {
     //If the given co-ordinates are contained within the bounded rectangle of the Ice Block, then return true, else false.
     sf::FloatRect boundingBox1 = sprite.getGlobalBounds();
-    boundingBox1.width-=20;
+    boundingBox1.width-=30;
     boundingBox1.left+=20;
     sf::FloatRect boundingBox2 = entity.getBounds();
     if(boundingBox1.intersects(boundingBox2))

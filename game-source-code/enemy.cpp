@@ -5,7 +5,7 @@ Enemy::Enemy(float level, int iVelocity)  //constuctor
     for(int i=0;i<num; i++)
     {
         momentum = iVelocity;
-        Entity entity(-(95+64)*i, 235+(70*i), 2);
+        Entity entity(-(95+64)*i, 215, iVelocity);
         enemyRow.push_back(entity);
     }
 }
@@ -18,6 +18,14 @@ void Enemy::drawInWindow(sf::RenderWindow &window)
     for(int i=0;i<num; i++) //loop through each ice block in the vector,
     {
         enemyRow[i].drawInWindow(window); // draw the current ice block.
+    }
+}
+
+void Enemy::movePosition() //update the iceRows position/s.
+{
+    for(int i=0;i<num; i++) //loop through each ice block in the vector,
+    {
+        enemyRow[i].movePosition(); //move the individual Ice object.
     }
 }
 

@@ -15,6 +15,7 @@ class Enemy
         void loadTexture(string name); //load the ice block image to each ice block in the row.
         bool findCollision( Entity entity);
         int getMomentum(){return momentum;};
+        void movePosition();
     protected:
 
     private:
