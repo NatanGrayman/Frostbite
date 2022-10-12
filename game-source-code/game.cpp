@@ -48,6 +48,7 @@ void Game::splashScreen()                                       //Function to co
                 start = true;                                      //The game can now start
                 createBackground();                                // Build the Background sprite.
                 loadAllTextures();                                 //Load all the textures
+                resetGame();
                 return;                                            //End the test.
             }
         }
@@ -66,22 +67,25 @@ void Game::loadAllTextures()
     levelText.setCharacterSize(22);
     levelText.setPosition(sf::Vector2f(50,20));
     levelText.setFillColor(sf::Color(132,148,255));
+
+}
+
+void Game::resetGame()
+{
+    alive = true;
     player.resetPlayer(true); //Reset the players properties.
     score.resetScore();
     iceLevels.resetActive(true);
     scoreIncrement=10;
     levelNumber=1;
+    levelText.setString(to_string(levelNumber));
+    stage=0;
 }
 
 void Game::playGame()
 {
     if(!start){return;};                                                //Check that user wants to play.
-    window.setFramerateLimit(60);                                       //Set the frame limit to 60.
-    alive = true;                                                       //The player starts the game alive
-    levelText.setString(to_string(levelNumber));                        //display the current level number.
-    score.resetScore();                                                 //reset the score.
-    stage=0;
-
+    window.setFramerateLimit(60);                                              //reset the score.
     Enemy enemy(1, 2);                                                  //create a row of enemies.
     int frameShown = 0;                                                 //variable to store how many frames have been shown, allows animations.
     while(window.isOpen())                                              //Loop as long as window is open
@@ -100,6 +104,7 @@ void Game::playGame()
             if(event.type == sf::Event::KeyPressed)                     //If a key is pressed,
             {
                 if(event.key.code==sf::Keyboard::Escape){window.close();}
+                else if(event.key.code==sf::Keyboard::Space && player.getLanded()){iceLevels.changeDirection();}
                 else
                 {
                     player.processEvents(event.key.code,true, finished);              //process the event.

@@ -17,6 +17,7 @@ class IceLevels
         bool getActive(int n){return activated[n];};
         void setActive(int n){activated[n]=true;};
         int getMomentumOfRow(int rowNumber){return iceLevels[rowNumber].getMomentum();};
+        void changeDirection();
     protected:
 
     private:

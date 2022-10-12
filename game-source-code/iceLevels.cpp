@@ -73,3 +73,8 @@ void IceLevels::resetActive(bool begin) // reset the state of each row of iceBlo
     }
 
 }
+
+void IceLevels::changeDirection()
+{
+
+}

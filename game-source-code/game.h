@@ -43,5 +43,6 @@ class Game
         int levelNumber=1;
         sf::Text levelText;
         void finishGame();
+        void resetGame();
 };
 #endif // GAME_H
