@@ -52,3 +52,11 @@ bool IceRow::findCollision(float x, float y, Entity entity) //search for a colli
     return false;                           //Otherwise return false.
 }
 
+void IceRow::changeDirection()
+{
+    momentum*=-1;
+    for(int i=0;i<num; i++) //loop through each ice block in the vector,
+    {
+        iceRow[i].changeDirection(); //load the image for each Ice object.
+    }
+}

@@ -66,6 +66,7 @@ void IceLevels::resetActive(bool begin) // reset the state of each row of iceBlo
 {
     if(count(activated.begin(), activated.end(), 1) == 4 ||begin)
     {
+        loadTexture("resources/iceBlock.png");
         for(int j=0;j<4;j++)
         {
             activated[j] = 0;
@@ -76,5 +77,8 @@ void IceLevels::resetActive(bool begin) // reset the state of each row of iceBlo
 
 void IceLevels::changeDirection()
 {
-
+    for(int j=0;j<4;j++)
+    {
+        iceLevels[j].changeDirection();
+    }
 }

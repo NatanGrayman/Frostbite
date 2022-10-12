@@ -86,7 +86,7 @@ void Game::playGame()
 {
     if(!start){return;};                                                //Check that user wants to play.
     window.setFramerateLimit(60);                                              //reset the score.
-    Enemy enemy(1, 2);                                                  //create a row of enemies.
+    Enemy enemy(215, 2);                                                  //create a row of enemies.
     int frameShown = 0;                                                 //variable to store how many frames have been shown, allows animations.
     while(window.isOpen())                                              //Loop as long as window is open
     {
@@ -104,7 +104,7 @@ void Game::playGame()
             if(event.type == sf::Event::KeyPressed)                     //If a key is pressed,
             {
                 if(event.key.code==sf::Keyboard::Escape){window.close();}
-                else if(event.key.code==sf::Keyboard::Space && player.getLanded()){iceLevels.changeDirection();}
+                else if(event.key.code==sf::Keyboard::Space && player.getLanded()){iceLevels.changeDirection();stage-=(!(stage==16));}
                 else
                 {
                     player.processEvents(event.key.code,true, finished);              //process the event.
@@ -208,4 +208,5 @@ void Game::finishGame()
     scoreIncrement+=10;                                                                     //each level the points per block is increased by 10.
     temperature.resetTemperature();                                                         //reset the temperature for the new level.
     player.resetPlayer(false);                                                                   //reset the players state for the new level.
+    iceLevels.resetActive(true);
 }

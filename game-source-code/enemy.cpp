@@ -5,7 +5,7 @@ Enemy::Enemy(float level, int iVelocity)  //constuctor
     for(int i=0;i<num; i++)   //Loop for each enemy in row
     {
         momentum = iVelocity;
-        Entity entity(-(95+64)*i, 215, iVelocity);   //Create entitiy with an intitial velocity
+        Entity entity(-(95+64)*i, level, iVelocity);   //Create entitiy with an intitial velocity
         enemyRow.push_back(entity);
     }
 }

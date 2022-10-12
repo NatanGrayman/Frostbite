@@ -13,6 +13,7 @@ class IceRow
         void loadTexture(/*sf::Texture& texture,*/ string name); //load the ice block image to each ice block in the row.
         bool findCollision(float x, float y, Entity entity);
         int getMomentum(){return momentum;};
+        void changeDirection();
     protected:
 
     private:

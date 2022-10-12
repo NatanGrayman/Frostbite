@@ -12,6 +12,7 @@ class Ice : public Entity
         void changePosition(float x, float y); // set a co-ordinate position of the Ice.
         void movePosition(); //move the Ice block.
         bool findCollision(float x, float y, Entity entity);
+        void changeDirection(){xMomentum*=-1;};
     protected:
 
     private:
