@@ -86,7 +86,9 @@ void Game::playGame()
 {
     if(!start){return;};                                                //Check that user wants to play.
     window.setFramerateLimit(60);                                              //reset the score.
-    Enemy enemy(215, 2);                                                  //create a row of enemies.
+    //Enemy enemy(215, 2);                                                  //create a row of enemies.
+    EnemyGenerator enemyGenerator;
+    bool prob;
     int frameShown = 0;                                                 //variable to store how many frames have been shown, allows animations.
     while(window.isOpen())                                              //Loop as long as window is open
     {
@@ -115,12 +117,15 @@ void Game::playGame()
                 player.processEvents(event.key.code,false, finished);             //process the release.
             }
         }
+        prob = (250==(rand()%250+1));
+        if(prob){enemyGenerator.generateEnemy();};
+        cout<<prob<<endl;
         window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
         iceLevels.movePosition();                                       //move the iceBlocks.
         iceLevels.drawInWindow(window);                                 //draw the iceBlocks.
         alive = player.checkDeath();                                    //check if the player has died, by falling into water.
-        player.movePlayer(enemy.findCollision(player));                 //move the player, pass in whether he is collided with an enemy.
+        player.movePlayer(enemyGenerator.findCollision(player));                 //move the player, pass in whether he is collided with an enemy.
         if(player.getGameWon()){finishGame();};                         //if the player has won the game and entered the igloo, process the animations.
         player.drawInWindow(window);                                    // draw the player.
         player.drawLives(window);                                       //draw the lives remaining
@@ -131,8 +136,8 @@ void Game::playGame()
         if(temperature.getTimeRemaining()<=0){player.freezeDeath();alive=false;}    //if the temperature is below 0, the player freezes and dies.
         temperature.drawTemperature(window, alive);                     //display the temperature.
         window.draw(levelText);                                         //draw the current level number.
-        enemy.movePosition();                                           //move the enemies
-        enemy.drawInWindow(window,frameShown);                          //draw and animate the enemies movement.
+        enemyGenerator.movePosition();                                           //move the enemies
+        enemyGenerator.drawInWindow(window,frameShown);                          //draw and animate the enemies movement.
         frameShown++;
         window.display();                                               //Display the current frame.
     }

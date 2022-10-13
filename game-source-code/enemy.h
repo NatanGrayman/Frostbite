@@ -15,7 +15,7 @@ class Enemy
         void loadTexture(string name); //load the enemy image to each enemy block in the row.
         bool findCollision( Entity entity);
         int getMomentum(){return momentum;};
-        void movePosition();
+        bool movePosition();
     protected:
 
     private:

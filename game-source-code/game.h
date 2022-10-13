@@ -13,6 +13,7 @@
 #include "score.h"
 #include "temperature.h"
 #include "enemy.h"
+#include "enemyGenerator.h"
 class Game
 {
     public:

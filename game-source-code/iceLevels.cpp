@@ -33,7 +33,6 @@ void IceLevels::movePosition()
     for(int j=0;j<4; j++) //loop through each IceRow in iceLevels,
     {
         iceLevels[j].movePosition(); //move the current IceRow to its new positions.
-
     }
 }
 
