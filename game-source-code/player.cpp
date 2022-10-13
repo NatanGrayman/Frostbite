@@ -8,6 +8,8 @@ Player::Player()
     grounded=true;     //Bailey starts off grounded
     ticks=0;           //Bailey has not been in the air
     lives=3;           //Bailey starts with 3 lives
+    buffer.loadFromFile("resources/playerJumpSound.wav");
+    jumpSound.setBuffer(buffer);
 }
 
 Player::Player(float xInitial, float yInitial)  //Created for testing purposes
@@ -43,12 +45,14 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
         {
             yMomentum=5;
             grounded=false;
+            jumpSound.play();
         }
         if(key==sf::Keyboard::Up && grounded)               //If up key was pressed and the player is grounded, set movement of player upwards(jump).
         {
             if(gameFinished && (xPosition+36)>550 && xPosition<650){finishGame();};
             yMomentum=-5;
             grounded=false;
+            jumpSound.play();
         }
         if(key==sf::Keyboard::Left)                         //If left key was pressed, set movement of player left.
         {
@@ -94,6 +98,7 @@ void Player::movePlayer(bool enemyCollision)                   //function to mov
     }
     if(ticks>=15)              //If he has been in the 'air' for fifteen frames
     {
+        jumpSound.stop();
         grounded=true;         //set as grounded
         yMomentum=0;           //Stop vertical movement
         ticks=0;               //Reset airtime count

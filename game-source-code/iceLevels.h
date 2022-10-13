@@ -2,6 +2,7 @@
 #define ICELEVELS_H
 #include <vector>
 #include "iceRow.h"
+#include <SFML/Audio.hpp>
 
 class IceLevels
 {
@@ -23,6 +24,8 @@ class IceLevels
     private:
         vector<IceRow> iceLevels; //create a vector of IceRow objects to form the IceLevels.
         vector<bool> activated{0,0,0,0};
+        sf::SoundBuffer buffer;
+        sf::Sound iceBreak;
 };
 
 #endif // ICELEVELS_H

@@ -11,6 +11,8 @@ IceLevels::IceLevels()
         iceLevels.push_back(iceRow); //add the iceRow to the vector.
         iVelocity*=-1; // reverse the velocity for the next row, in order for the rows to be moving in opposite directions.
     }
+    buffer.loadFromFile("resources/iceBreakSound.wav");
+    iceBreak.setBuffer(buffer);
 }
 
 IceLevels::~IceLevels()
@@ -55,10 +57,12 @@ int IceLevels::findCollision(float x, float y, Entity entity) //search for a col
         if(iceLevels[j].findCollision(x, y, entity)) //search for a collision for the current IceRow.
         {
             loadOneRowTexture("resources/landOnIceBlock.png", j);
+            if(activated[j]!=1){iceBreak.play();};
             if(count(activated.begin(), activated.end(), 1) == 4){loadTexture("resources/iceBlock.png");};
             return j;                    //If a collision is found, return true.
         }
     }
+    iceBreak.stop();
     return -1;                           //Otherwise return false.
 }
 

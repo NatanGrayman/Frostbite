@@ -24,6 +24,7 @@ void Enemy::drawInWindow(sf::RenderWindow &window, int frames)
 
 void Enemy::movePosition() //update the enemy position/s.
 {
+    //if(enemyRow[num-1].getXPosition()>800){delete this;};
     for(int i=0;i<num; i++) //loop through each enemy block in the vector,
     {
         enemyRow[i].movePosition(); //move the individual enemy object.

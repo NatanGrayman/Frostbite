@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Entity.h"
+#include <SFML/Audio.hpp>
 
 class Player : public Entity
 {
@@ -36,6 +37,8 @@ class Player : public Entity
         sf::Text playerText;
         bool rightFacing = true;
         bool gameWon = false;
+        sf::SoundBuffer buffer;
+        sf::Sound jumpSound;
 };
 
 #endif // PLAYER_H
