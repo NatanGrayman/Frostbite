@@ -22,6 +22,7 @@ class Player : public Entity
         int getLives(){return lives;};
         void resetPlayer(bool life);
         bool getGameWon(){return gameWon;};
+        void loadTexture(string name);
     protected:
 
     private:
@@ -39,6 +40,8 @@ class Player : public Entity
         bool gameWon = false;
         sf::SoundBuffer buffer;
         sf::Sound jumpSound;
+        sf::Texture texture;
+        int animated = 0;
 };
 
 #endif // PLAYER_H

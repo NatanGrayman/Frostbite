@@ -78,10 +78,12 @@ void IceLevels::resetActive(bool begin) // reset the state of each row of iceBlo
 
 }
 
-void IceLevels::changeDirection()
+void IceLevels::changeDirection(float yPos)
 {
-    for(int j=0;j<4;j++)
+    iceLevels[(yPos-215)/70].changeDirection();
+    /*for(int j=0;j<4;j++)
     {
         iceLevels[j].changeDirection();
     }
+    */
 }

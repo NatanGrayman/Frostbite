@@ -24,7 +24,8 @@ class Enemy
         sf::Texture texture;
         int momentum;
         sf::Texture enemyTexture;//
-        vector<string> crabs{"crab_1.png","crab_2.png","crab_3.png","crab_4.png","crab_5.png","crab_6.png" };
+        vector<string> crabs{"Crab_1.png","Crab_2.png","Crab_3.png","Crab_4.png","Crab_5.png","Crab_6.png" };
+        //vector<string> crabs{"Clam_1.png","Clam_2.png","Clam_3.png","Clam_4.png","Clam_5.png","Clam_6.png", "Clam_7", "Clam_8","Clam_9"};
 };
 
 #endif // ENEMY_H

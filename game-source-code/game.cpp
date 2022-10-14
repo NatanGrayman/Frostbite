@@ -57,7 +57,7 @@ void Game::splashScreen()                                       //Function to co
 
 void Game::loadAllTextures()
 {
-    player.loadTexture(baileyTexture, "resources/bailey.png");   // add the bailey image as a texture
+    player.loadTexture(/*baileyTexture,*/ "resources/bailey.png");   // add the bailey image as a texture
     player.loadFont();
     iceLevels.loadTexture(/*iceTexture,*/ "resources/iceBlock.png");       //add the ice block image as a texture
     score.loadFont();                                                       //load the scores font.
@@ -106,7 +106,7 @@ void Game::playGame()
             if(event.type == sf::Event::KeyPressed)                     //If a key is pressed,
             {
                 if(event.key.code==sf::Keyboard::Escape){window.close();}
-                else if(event.key.code==sf::Keyboard::Space && player.getLanded()){iceLevels.changeDirection();stage-=(!(stage==16));}
+                else if(event.key.code==sf::Keyboard::Space && player.getLanded()){iceLevels.changeDirection(player.getYPosition());stage-=((stage!=16 && stage>0));}
                 else
                 {
                     player.processEvents(event.key.code,true, finished);              //process the event.
@@ -139,6 +139,7 @@ void Game::playGame()
         enemyGenerator.movePosition();                                           //move the enemies
         enemyGenerator.drawInWindow(window,frameShown);                          //draw and animate the enemies movement.
         frameShown++;
+        frameShown=(frameShown%60);
         window.display();                                               //Display the current frame.
     }
 }
