@@ -22,6 +22,11 @@ class Game
         void playGame();
         void splashScreen();
     private:
+        void gameLogic();
+        void processIceLevels();
+        void processPlayer();
+        void processTemperature();
+        void processEnemies();
         bool start = false;
         int width=800; //Set initial width.
         int height=540; //Set initial height.
@@ -47,5 +52,7 @@ class Game
         void resetGame();
         EnemyGenerator enemyGenerator;
         int enemyWeighting = 250;
+        int frameShown = 0;                                                 //variable to store how many frames have been shown, allows animations.
+
 };
 #endif // GAME_H

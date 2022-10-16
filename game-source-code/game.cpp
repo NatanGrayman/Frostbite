@@ -88,9 +88,6 @@ void Game::playGame()
 {
     if(!start){return;};                                                //Check that user wants to play.
     window.setFramerateLimit(60);                                              //reset the score.
-    //Enemy enemy(215, 2);                                                  //create a row of enemies.
-    bool prob;
-    int frameShown = 0;                                                 //variable to store how many frames have been shown, allows animations.
     while(window.isOpen())                                              //Loop as long as window is open
     {
         if(player.getLives()<0)                                         //if the player loses the game and has no lives, return to the splash screen.
@@ -118,30 +115,50 @@ void Game::playGame()
                 player.processEvents(event.key.code,false, finished);             //process the release.
             }
         }
-        prob = (enemyWeighting==(rand()%enemyWeighting+1));
-        if(prob){enemyGenerator.generateEnemy();};
         window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
-        iceLevels.movePosition();                                       //move the iceBlocks.
-        iceLevels.drawInWindow(window);                                 //draw the iceBlocks.
-        alive = player.checkDeath();                                    //check if the player has died, by falling into water.
-        player.movePlayer(enemyGenerator.findCollision(player));                 //move the player, pass in whether he is collided with an enemy.
-        if(player.getGameWon()){finishGame();};                         //if the player has won the game and entered the igloo, process the animations.
-        player.drawInWindow(window);                                    // draw the player.
-        player.drawLives(window);                                       //draw the lives remaining
-        checkLanded();                                                  //check if the player has landed on the blocks.
+        gameLogic();
         igloo.drawIgloo(window, stage);                                 //draw the current stage of the igloo.
         score.drawScore(window);                                        //display the score.
-        finished = int(stage/16);                                       //if the player has collected 16 ice blocks, he is 'finished' and can win the game.
-        if(temperature.getTimeRemaining()<=0){player.freezeDeath();alive=false;}    //if the temperature is below 0, the player freezes and dies.
-        temperature.drawTemperature(window, alive);                     //display the temperature.
         window.draw(levelText);                                         //draw the current level number.
-        enemyGenerator.movePosition();                                           //move the enemies
-        enemyGenerator.drawInWindow(window,frameShown);                          //draw and animate the enemies movement.
         frameShown++;
-        //frameShown=(frameShown%60);
         window.display();                                               //Display the current frame.
     }
+}
+
+void Game::gameLogic()
+{
+    processIceLevels();
+    processPlayer();
+    processTemperature();
+    processEnemies();
+    finished = int(stage/16);                                       //if the player has collected 16 ice blocks, he is 'finished' and can win the game.
+}
+void Game::processIceLevels()
+{
+    iceLevels.movePosition();                                       //move the iceBlocks.
+    iceLevels.drawInWindow(window);                                 //draw the iceBlocks.
+}
+void Game::processPlayer()
+{
+    alive = player.checkDeath();                                    //check if the player has died, by falling into water.
+    player.movePlayer(enemyGenerator.findCollision(player));                 //move the player, pass in whether he is collided with an enemy.
+    if(player.getGameWon()){finishGame();};                         //if the player has won the game and entered the igloo, process the animations.
+    player.drawInWindow(window);                                    // draw the player.
+    player.drawLives(window);                                       //draw the lives remaining
+    checkLanded();                                                  //check if the player has landed on the blocks.
+}
+void Game::processTemperature()
+{
+    if(temperature.getTimeRemaining()<=0){player.freezeDeath();alive=false;}    //if the temperature is below 0, the player freezes and dies.
+    temperature.drawTemperature(window, alive);                     //display the temperature.
+}
+void Game::processEnemies()
+{
+    enemyGenerator.drawInWindow(window,frameShown);                          //draw and animate the enemies movement.
+    bool prob = (enemyWeighting==(rand()%enemyWeighting+1));
+    if(prob){enemyGenerator.generateEnemy();};
+    enemyGenerator.movePosition();                                           //move the enemies
 }
 
 void Game::createBackground()                 //Function to create the Background sprite
