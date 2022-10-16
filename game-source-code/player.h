@@ -9,30 +9,32 @@ class Player : public Entity
         Player();   //Constructor
         Player(float xInitial, float yInitial);
         virtual ~Player();  //Destructor
+        void loadTexture(string name);
+        void loadFont();
         void processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFinished);  //Member function to act on user input
         void movePlayer(int enemyVelocity);    //Member function to move the position of the player.
+
+        void drawLives(sf::RenderWindow& window);
+        void freezeDeath() ;
+        bool checkDeath();
+        void resetPlayer(bool life);
+
+        int getLives(){return lives;};
+        bool getGameWon(){return gameWon;};
         void setLanded(bool state){landed=state;};
         bool getLanded(){return landed;};
         void setFloorMomentum(float x){floorMomentum=x;};
         bool getGrounded(){return grounded;};
-        void drawLives(sf::RenderWindow& window);
-        void loadFont();
-        void freezeDeath() ;
-        bool checkDeath();
-        int getLives(){return lives;};
-        void resetPlayer(bool life);
-        bool getGameWon(){return gameWon;};
-        void loadTexture(string name);
     protected:
 
     private:
         void checkXBoundary();    //Function to check not out of bounds in horizontal direction
         void checkYBoundary();    //Function to check not out of bounds in vertical direction
+        void finishGame();
         bool grounded;     //grounded as a boolean to know if in air vs ground
         int ticks;         //ticks to count jumping time.
         bool landed;              //Variable that stores the state of whether the player has landed on an Ice block.
         float floorMomentum=0;    //Momentum of the floor that the player stands on to adjust momentum to that.
-        void finishGame();
         int lives;
         bool rightFacing = true;
         bool gameWon = false;
