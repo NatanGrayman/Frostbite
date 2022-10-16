@@ -57,8 +57,6 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
         if(key==sf::Keyboard::Left)                         //If left key was pressed, set movement of player left.
         {
             xMomentum=-5;
-            //if(animated>30){loadTexture("resources/baileyWalking.png");}else{loadTexture("resources/bailey.png");};
-            //animated = (animated+1)%60;
             sprite.setScale(-1,1);                         //Flip Bailey , to face right, when click left.
             xPosition+=(rightFacing*32);                   //If rightfacing (1 or 0) then add width bailey, to adjust for mirroring
             rightFacing=false;
@@ -67,8 +65,6 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
         if(key==sf::Keyboard::Right)                       //If right key was pressed, set movement of player right.
         {
             xMomentum=5;
-            //if(animated>30){loadTexture("resources/baileyWalking.png");}else{loadTexture("resources/bailey.png");};
-            //animated = (animated+1)%60;
             sprite.setScale(1,1);                          //Scale Bailey.
             xPosition-=(!rightFacing*32);                  //If rightfacing (1 or 0) then add width bailey, to adjust for mirroring
             rightFacing=true;
@@ -77,7 +73,6 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
     else
     {
         xMomentum=0;                                 //If the key has been released by user then stop horizontal movement.
-        //if(animated>30){loadTexture("resources/baileyWalking.png");animated=(animated++)%60;}else{loadTexture("resources/bailey.png");};
     }
 }
 

@@ -48,6 +48,7 @@ void Game::splashScreen()                                       //Function to co
                 start = true;                                      //The game can now start
                 createBackground();                                // Build the Background sprite.
                 loadAllTextures();                                 //Load all the textures
+                loadFont();
                 resetGame();
                 return;                                            //End the test.
             }
@@ -58,15 +59,23 @@ void Game::splashScreen()                                       //Function to co
 void Game::loadAllTextures()
 {
     player.loadTexture(/*baileyTexture,*/ "resources/bailey.png");   // add the bailey image as a texture
-    player.loadFont();
     iceLevels.loadTexture(/*iceTexture,*/ "resources/iceBlock.png");       //add the ice block image as a texture
-    score.loadFont();                                                       //load the scores font.
-    temperature.loadFont();                                                 //load the temperature font.
+
+}
+void Game::loadLevelFont()
+{
     if(!textFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};
     levelText.setFont(textFont);
     levelText.setCharacterSize(22);
     levelText.setPosition(sf::Vector2f(50,20));
     levelText.setFillColor(sf::Color(132,148,255));
+}
+void Game::loadFont()
+{
+    player.loadFont();
+    score.loadFont();                                                       //load the scores font.
+    temperature.loadFont();                                                 //load the temperature font.
+    loadLevelFont();
 }
 
 void Game::resetGame()

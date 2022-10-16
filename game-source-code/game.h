@@ -37,6 +37,8 @@ class Game
         sf::Texture baileyTexture;  //Create Bailey as a texture
         IceLevels iceLevels;         //Pass in the initial velocity to the iceblock
         void loadAllTextures();     //At the start of the game, all Textures are loaded
+        void loadFont();
+        void loadLevelFont();
         void checkLanded();
         Igloo igloo;
         Score score;

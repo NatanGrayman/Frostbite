@@ -16,6 +16,9 @@ class Igloo
 
     private:
         vector<sf::RectangleShape> iglooPieces;
+        void createBottomLayers();
+        void createRoofLayers();
+        void createDoor();
 };
 
 #endif // IGLOO_H
