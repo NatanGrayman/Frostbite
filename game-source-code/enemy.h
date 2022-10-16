@@ -13,7 +13,7 @@ class Enemy
         virtual ~Enemy();
         void drawInWindow(sf::RenderWindow &window, int frames); // function to render each enemy in the row to the window.
         void loadTexture(string name); //load the enemy image to each enemy block in the row.
-        bool findCollision( Entity entity);
+        int findCollision( Entity entity);
         int getMomentum(){return momentum;};
         bool movePosition();
     protected:

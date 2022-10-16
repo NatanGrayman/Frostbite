@@ -5,7 +5,7 @@ Enemy::Enemy(float level, int iVelocity)  //constuctor
     for(int i=0;i<num; i++)   //Loop for each enemy in row
     {
         momentum = iVelocity;
-        Entity entity(-(95+64)*i, level, iVelocity);   //Create entitiy with an intitial velocity
+        Entity entity(-(momentum/2)*(95+64)*i+(800*(momentum-1)/-3), level, iVelocity);   //Create entitiy with an intitial velocity
         enemyRow.push_back(entity);
     }
 }
@@ -24,7 +24,8 @@ void Enemy::drawInWindow(sf::RenderWindow &window, int frames)
 
 bool Enemy::movePosition() //update the enemy position/s.
 {
-    if(enemyRow[num-1].getXPosition()>800){return true;};
+    if(momentum>0 && enemyRow[num-1].getXPosition()>800){return true;};
+    if(momentum<0 && enemyRow[num-1].getXPosition()<0){return true;};
     for(int i=0;i<num; i++) //loop through each enemy block in the vector,
     {
         enemyRow[i].movePosition(); //move the individual enemy object.
@@ -40,13 +41,13 @@ void Enemy::loadTexture(string name)
     }
 }
 
-bool Enemy::findCollision(Entity entity) //search for a collision of each enemy block with inputted co-ordinates.
+int Enemy::findCollision(Entity entity) //search for a collision of each enemy block with inputted co-ordinates.
 {
     for(int i=0;i<num; i++) //loop through each enemy in enemy row,
     {
         if(enemyRow[i].findCollision(entity)) //search for a collision for the current enemy.
         {
-            return true;                    //If a collision is found, return true.
+            return momentum;                    //If a collision is found, return true.
         }
     }
     return false;                           //Otherwise return false.

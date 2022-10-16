@@ -45,5 +45,6 @@ class Game
         sf::Text levelText;
         void finishGame();
         void resetGame();
+        Player player2;
 };
 #endif // GAME_H

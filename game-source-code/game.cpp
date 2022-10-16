@@ -80,6 +80,7 @@ void Game::resetGame()
     levelNumber=1;
     levelText.setString(to_string(levelNumber));
     stage=0;
+    temperature.resetTemperature();
 }
 
 void Game::playGame()
@@ -119,7 +120,6 @@ void Game::playGame()
         }
         prob = (250==(rand()%250+1));
         if(prob){enemyGenerator.generateEnemy();};
-        cout<<prob<<endl;
         window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
         iceLevels.movePosition();                                       //move the iceBlocks.
@@ -176,9 +176,9 @@ void Game::checkLanded()                                                        
         player.setLanded(true);                                                   //If there is a collision, set the landed state to true.
         player.setFloorMomentum(iceLevels.getMomentumOfRow(state));               // add the momentum of the floor to the players.
         bool initialLanding = (!iceLevels.getActive(state));                      //If first time landed on block
-        score.changeScore(initialLanding*scoreIncrement);                         //increase the players score
-        if(initialLanding&&stage<16){stage++;};                                   //add an extra piece to the igloo
-        iceLevels.setActive(state);
+        //score.changeScore((stage<16&&initialLanding)*scoreIncrement);             //increase the players score
+        //if(initialLanding&&stage<16){stage++;};                                   //add an extra piece to the igloo
+        if(initialLanding&&stage<16){iceLevels.setActive(state);stage++;score.changeScore(scoreIncrement);};
     }
     else
     {

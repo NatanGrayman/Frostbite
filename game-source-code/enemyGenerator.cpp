@@ -15,7 +15,9 @@ void EnemyGenerator::generateEnemy()
     int rowNum = rand()%4;
     if(rowIsOccupied[rowNum]){return;};
     rowIsOccupied[rowNum] = true;
-    Enemy newEnemy(215+(70*rowNum), 2);
+    bool direction = rand()%2;
+    cout<<direction<<endl;
+    Enemy newEnemy(215+(70*rowNum), 2-(4*direction));
     enemyList.push_back(newEnemy);
 }
 void EnemyGenerator::movePosition()
@@ -36,14 +38,14 @@ void EnemyGenerator::drawInWindow(sf::RenderWindow &window, int frame)
         enemyList[k].drawInWindow(window, frame);
     }
 }
-bool EnemyGenerator::findCollision(Entity entity)
+int EnemyGenerator::findCollision(Entity entity)
 {
     for(int k=0;k<enemyList.size(); k++)
     {
         if(enemyList[k].findCollision(entity))
         {
-            return true;
+            return enemyList[k].getMomentum();
         }
     }
-    return false;
+    return 0;
 }

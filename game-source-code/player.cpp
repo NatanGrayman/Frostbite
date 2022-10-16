@@ -49,7 +49,7 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
         }
         if(key==sf::Keyboard::Up && grounded)               //If up key was pressed and the player is grounded, set movement of player upwards(jump).
         {
-            if(gameFinished && (xPosition+36)>550 && xPosition<650){finishGame();};
+            if(gameFinished && (xPosition+36)>550 && xPosition<650 && yPosition==160){finishGame();};
             yMomentum=-5;
             grounded=false;
             jumpSound.play();
@@ -57,8 +57,8 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
         if(key==sf::Keyboard::Left)                         //If left key was pressed, set movement of player left.
         {
             xMomentum=-5;
-            if(animated>30){loadTexture("resources/baileyWalking.png");}else{loadTexture("resources/bailey.png");};
-            animated = (animated+1)%60;
+            //if(animated>30){loadTexture("resources/baileyWalking.png");}else{loadTexture("resources/bailey.png");};
+            //animated = (animated+1)%60;
             sprite.setScale(-1,1);                         //Flip Bailey , to face right, when click left.
             xPosition+=(rightFacing*32);                   //If rightfacing (1 or 0) then add width bailey, to adjust for mirroring
             rightFacing=false;
@@ -67,8 +67,8 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
         if(key==sf::Keyboard::Right)                       //If right key was pressed, set movement of player right.
         {
             xMomentum=5;
-            if(animated>30){loadTexture("resources/baileyWalking.png");}else{loadTexture("resources/bailey.png");};
-            animated = (animated+1)%60;
+            //if(animated>30){loadTexture("resources/baileyWalking.png");}else{loadTexture("resources/bailey.png");};
+            //animated = (animated+1)%60;
             sprite.setScale(1,1);                          //Scale Bailey.
             xPosition-=(!rightFacing*32);                  //If rightfacing (1 or 0) then add width bailey, to adjust for mirroring
             rightFacing=true;
@@ -77,7 +77,7 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFi
     else
     {
         xMomentum=0;                                 //If the key has been released by user then stop horizontal movement.
-        if(animated>30){loadTexture("resources/baileyWalking.png");animated=(animated++)%60;}else{loadTexture("resources/bailey.png");};
+        //if(animated>30){loadTexture("resources/baileyWalking.png");animated=(animated++)%60;}else{loadTexture("resources/bailey.png");};
     }
 }
 
@@ -95,7 +95,7 @@ void Player::freezeDeath()  //Method to check if temperature runs out.
     yPosition=160;
 }
 
-void Player::movePlayer(bool enemyCollision)                   //function to move player.
+void Player::movePlayer(int enemyVelocity)                   //function to move player.
 {
     if(!grounded)               //Check not grounded to set time in 'air'
     {
@@ -109,7 +109,7 @@ void Player::movePlayer(bool enemyCollision)                   //function to mov
         ticks=0;               //Reset airtime count
     }
     //if the player has collided with an enemy, movement is disabled. Unless mid-jump in which case the jump is completed.
-    if(enemyCollision){xMomentum=0; floorMomentum=2; if(landed){yMomentum=0;}};
+    if(enemyVelocity!=0){xMomentum=0; floorMomentum=enemyVelocity; if(landed){yMomentum=0;}};
     xPosition+=xMomentum;     //Change the horizontal position of the player
     xPosition+=floorMomentum; //add the momentum of the floor to the players position
     checkXBoundary();         //check the screen boundaries
