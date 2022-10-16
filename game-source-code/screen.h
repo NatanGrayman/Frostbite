@@ -40,6 +40,11 @@ class Screen
         void finishGame();
         EnemyGenerator enemyGenerator;
         int enemyWeighting = 250;
+        sf::Sprite background; //Sprite initalised to hold the background.
+        sf::RenderTexture backgroundTexture; //Create RenderTexture to store background
+        void createBackground(); //create background image and stores in background.
+        Temperature temperature;
+        void resetGame();
 };
 
 #endif // SCREEN_H

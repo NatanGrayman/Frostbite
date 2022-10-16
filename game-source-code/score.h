@@ -21,10 +21,6 @@ class Score
         int scoreCount=0;
         sf::Font scoreFont;
         sf::Text scoreText;
-        sf::Sprite background; //Sprite initalised to hold the background.
-        sf::RenderTexture backgroundTexture; //Create RenderTexture to store background
-        void createBackground(); //create background image and stores in background.
-        Temperature temperature;
 
 };
 
