@@ -19,8 +19,8 @@ class IceRow
     private:
         vector<Ice> iceRow; //create a vector of Ice objects to form the IceRow.
         int num=3;          //number of ice blocks in a row.
-        sf::Texture texture;
         int momentum;
+        sf::Texture texture;
 };
 
 #endif // ICEROW_H

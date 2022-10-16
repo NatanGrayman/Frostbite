@@ -22,39 +22,40 @@ class Game
         void playGame();
         void splashScreen();
     private:
+        int width=800; //Set initial width.
+        int height=540; //Set initial height.
+        bool start = false;
+        int stage=0;
+        bool finished = false; //is game over.
+        bool alive; //is player dead
+        int scoreIncrement=10;
+        int levelNumber=1;
+        int enemyWeighting = 250;
+        int frameShown = 0;                                               //variable to store how many frames have been shown, allows animations.
+
+        sf::Sprite background; //Sprite initalised to hold the background.
+        sf::RenderTexture backgroundTexture; //Create RenderTexture to store background
+        sf::Font textFont;
+        sf::Text levelText;
+
+        Player player;           //Create player object
+        IceLevels iceLevels;         //Pass in the initial velocity to the iceblock
+        Igloo igloo;
+        Score score;
+        Temperature temperature;
+        EnemyGenerator enemyGenerator;
+
+        void createBackground(); //create background image and stores in background.
+        void loadLevelFont();
+        void loadAllTextures();     //At the start of the game, all Textures are loaded
+        void loadFont();
         void gameLogic();
         void processIceLevels();
         void processPlayer();
         void processTemperature();
         void processEnemies();
-        bool start = false;
-        int width=800; //Set initial width.
-        int height=540; //Set initial height.
-        sf::Sprite background; //Sprite initalised to hold the background.
-        sf::RenderTexture backgroundTexture; //Create RenderTexture to store background
-        void createBackground(); //create background image and stores in background.
-        Player player;           //Create player object
-        sf::Texture baileyTexture;  //Create Bailey as a texture
-        IceLevels iceLevels;         //Pass in the initial velocity to the iceblock
-        void loadAllTextures();     //At the start of the game, all Textures are loaded
-        void loadFont();
-        void loadLevelFont();
         void checkLanded();
-        Igloo igloo;
-        Score score;
-        int scoreIncrement=10;
-        int stage=0;
-        bool finished = false;
-        Temperature temperature;
-        bool alive;
-        sf::Font textFont;
-        int levelNumber=1;
-        sf::Text levelText;
         void finishGame();
         void resetGame();
-        EnemyGenerator enemyGenerator;
-        int enemyWeighting = 250;
-        int frameShown = 0;                                                 //variable to store how many frames have been shown, allows animations.
-
 };
 #endif // GAME_H

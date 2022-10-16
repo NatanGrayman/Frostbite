@@ -19,14 +19,11 @@ class Enemy
     protected:
 
     private:
-        vector<Entity> enemyRow; //create a vector of enemy objects to form the enemyRow.
         int num=3;          //number of enemy blocks in a row.
-        sf::Texture texture;
+        vector<Entity> enemyRow; //create a vector of enemy objects to form the enemyRow.
         int momentum;
-        sf::Texture enemyTexture;//
+        sf::Texture texture;
         vector<string> imgNames;
-        //vector<string> crabs{"Crab_1.png","Crab_2.png","Crab_3.png","Crab_4.png","Crab_5.png","Crab_6.png" };
-        //vector<string> crabs{"Clam_1.png","Clam_2.png","Clam_3.png","Clam_4.png","Clam_5.png","Clam_6.png", "Clam_7", "Clam_8","Clam_9"};
 };
 
 #endif // ENEMY_H

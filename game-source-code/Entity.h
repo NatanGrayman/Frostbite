@@ -18,12 +18,12 @@ public:
     void drawInWindow(sf::RenderWindow &window);
     void positionUpdate();
     void loadTexture(sf::Texture &texture, string name);
-    float getXPosition(){return xPosition;};                   //Getter for testing purposes.
-    float getYPosition(){return yPosition;};                   //Getter for testing purposes.
-    sf::FloatRect getBounds(){return sprite.getGlobalBounds();};
     bool findCollision(Entity entity);
     void movePosition();
     void flipSprite(){sprite.scale(-1,1);};
+    float getXPosition(){return xPosition;};                   //Getter for testing purposes.
+    float getYPosition(){return yPosition;};                   //Getter for testing purposes.
+    sf::FloatRect getBounds(){return sprite.getGlobalBounds();};
 protected:
     sf::Sprite sprite;   //sprite initialized.
     float xPosition;    //Store xPosition

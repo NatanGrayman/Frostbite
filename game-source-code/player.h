@@ -34,14 +34,14 @@ class Player : public Entity
         float floorMomentum=0;    //Momentum of the floor that the player stands on to adjust momentum to that.
         void finishGame();
         int lives;
-        sf::Font playerFont;
-        sf::Text playerText;
         bool rightFacing = true;
         bool gameWon = false;
+        int animated = 0;
+        sf::Font playerFont;
+        sf::Text playerText;
         sf::SoundBuffer buffer;
         sf::Sound jumpSound;
         sf::Texture texture;
-        int animated = 0;
 };
 
 #endif // PLAYER_H

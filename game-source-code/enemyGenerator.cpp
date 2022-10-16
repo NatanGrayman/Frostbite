@@ -31,7 +31,6 @@ void EnemyGenerator::resetEnemies()
 }
 void EnemyGenerator::movePosition()
 {
-    cout<<enemyList.size()<<endl;
     for(int k=0;k<enemyList.size(); k++)
     {
         if(enemyList[k].movePosition())
