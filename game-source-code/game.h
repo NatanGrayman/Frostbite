@@ -45,6 +45,7 @@ class Game
         sf::Text levelText;
         void finishGame();
         void resetGame();
-        Player player2;
+        EnemyGenerator enemyGenerator;
+        int enemyWeighting = 250;
 };
 #endif // GAME_H

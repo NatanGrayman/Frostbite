@@ -23,6 +23,7 @@ public:
     sf::FloatRect getBounds(){return sprite.getGlobalBounds();};
     bool findCollision(Entity entity);
     void movePosition();
+    void flipSprite(){sprite.scale(-1,1);};
 protected:
     sf::Sprite sprite;   //sprite initialized.
     float xPosition;    //Store xPosition

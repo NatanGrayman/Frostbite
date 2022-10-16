@@ -9,7 +9,7 @@
 class Enemy
 {
     public:
-        Enemy(float level, int iVelocity);
+        Enemy(float level, int iVelocity, vector<string> images);
         virtual ~Enemy();
         void drawInWindow(sf::RenderWindow &window, int frames); // function to render each enemy in the row to the window.
         void loadTexture(string name); //load the enemy image to each enemy block in the row.
@@ -24,7 +24,8 @@ class Enemy
         sf::Texture texture;
         int momentum;
         sf::Texture enemyTexture;//
-        vector<string> crabs{"Crab_1.png","Crab_2.png","Crab_3.png","Crab_4.png","Crab_5.png","Crab_6.png" };
+        vector<string> imgNames;
+        //vector<string> crabs{"Crab_1.png","Crab_2.png","Crab_3.png","Crab_4.png","Crab_5.png","Crab_6.png" };
         //vector<string> crabs{"Clam_1.png","Clam_2.png","Clam_3.png","Clam_4.png","Clam_5.png","Clam_6.png", "Clam_7", "Clam_8","Clam_9"};
 };
 

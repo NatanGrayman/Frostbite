@@ -2,7 +2,8 @@
 
 EnemyGenerator::EnemyGenerator()
 {
-    //ctor
+    enemyImages.push_back(crabs);
+    enemyImages.push_back(clams);
 }
 
 EnemyGenerator::~EnemyGenerator()
@@ -16,9 +17,17 @@ void EnemyGenerator::generateEnemy()
     if(rowIsOccupied[rowNum]){return;};
     rowIsOccupied[rowNum] = true;
     bool direction = rand()%2;
-    cout<<direction<<endl;
-    Enemy newEnemy(215+(70*rowNum), 2-(4*direction));
+    bool pickEnemy = rand()%2;
+    Enemy newEnemy(215+(70*rowNum), 2-(4*direction), enemyImages[pickEnemy]);
     enemyList.push_back(newEnemy);
+}
+void EnemyGenerator::resetEnemies()
+{
+    if(enemyList.size()==0){return;};
+    for(int enemy=0;enemy<=enemyList.size();enemy++)
+    {
+        enemyList.erase(enemyList.begin()+enemy);
+    }
 }
 void EnemyGenerator::movePosition()
 {

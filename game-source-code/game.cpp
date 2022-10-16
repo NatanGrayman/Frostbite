@@ -81,6 +81,8 @@ void Game::resetGame()
     levelText.setString(to_string(levelNumber));
     stage=0;
     temperature.resetTemperature();
+    enemyGenerator.resetEnemies();
+    iceLevels.changeDirection(true);
 }
 
 void Game::playGame()
@@ -88,7 +90,6 @@ void Game::playGame()
     if(!start){return;};                                                //Check that user wants to play.
     window.setFramerateLimit(60);                                              //reset the score.
     //Enemy enemy(215, 2);                                                  //create a row of enemies.
-    EnemyGenerator enemyGenerator;
     bool prob;
     int frameShown = 0;                                                 //variable to store how many frames have been shown, allows animations.
     while(window.isOpen())                                              //Loop as long as window is open
@@ -107,7 +108,7 @@ void Game::playGame()
             if(event.type == sf::Event::KeyPressed)                     //If a key is pressed,
             {
                 if(event.key.code==sf::Keyboard::Escape){window.close();}
-                else if(event.key.code==sf::Keyboard::Space && player.getLanded()){iceLevels.changeDirection(player.getYPosition());stage-=((stage!=16 && stage>0));}
+                else if(event.key.code==sf::Keyboard::Space && player.getLanded() && stage>0){iceLevels.changeDirection(false,player.getYPosition());stage-=((stage!=16 && stage>0));}
                 else
                 {
                     player.processEvents(event.key.code,true, finished);              //process the event.
@@ -118,7 +119,7 @@ void Game::playGame()
                 player.processEvents(event.key.code,false, finished);             //process the release.
             }
         }
-        prob = (250==(rand()%250+1));
+        prob = (enemyWeighting==(rand()%enemyWeighting+1));
         if(prob){enemyGenerator.generateEnemy();};
         window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
@@ -139,7 +140,7 @@ void Game::playGame()
         enemyGenerator.movePosition();                                           //move the enemies
         enemyGenerator.drawInWindow(window,frameShown);                          //draw and animate the enemies movement.
         frameShown++;
-        frameShown=(frameShown%60);
+        //frameShown=(frameShown%60);
         window.display();                                               //Display the current frame.
     }
 }
@@ -211,8 +212,9 @@ void Game::finishGame()
         frame++;
     }
     levelText.setString(to_string(++levelNumber));                                         //increase the level number showing the next level has started.
-    scoreIncrement+=10;                                                                     //each level the points per block is increased by 10.
+    scoreIncrement+=((levelNumber<=10)*10);                                                                     //each level the points per block is increased by 10.
     temperature.resetTemperature();                                                         //reset the temperature for the new level.
     player.resetPlayer(false);                                                                   //reset the players state for the new level.
     iceLevels.resetActive(true);
+    enemyWeighting-=((levelNumber<=4)*50);
 }
