@@ -67,7 +67,6 @@ void Game::loadAllTextures()
     levelText.setCharacterSize(22);
     levelText.setPosition(sf::Vector2f(50,20));
     levelText.setFillColor(sf::Color(132,148,255));
-
 }
 
 void Game::resetGame()
