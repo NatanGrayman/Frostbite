@@ -9,7 +9,7 @@ class EnemyGenerator
         virtual ~EnemyGenerator();
         void drawInWindow(sf::RenderWindow &window, int frame);
         int findCollision(Entity entity);
-        void generateEnemy();
+        void generateEnemy(int random=-1);
         void movePosition();
         void resetEnemies();
     protected:

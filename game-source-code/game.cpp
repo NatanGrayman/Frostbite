@@ -166,7 +166,7 @@ void Game::processEnemies()
 {
     enemyGenerator.drawInWindow(window,frameShown);                          //draw and animate the enemies movement.
     bool prob = (enemyWeighting==(rand()%enemyWeighting+1));
-    if(prob){enemyGenerator.generateEnemy();};
+    if(prob){enemyGenerator.generateEnemy(-1);};
     enemyGenerator.movePosition();                                           //move the enemies
 }
 

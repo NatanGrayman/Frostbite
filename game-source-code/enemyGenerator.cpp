@@ -11,13 +11,14 @@ EnemyGenerator::~EnemyGenerator()
     //dtor
 }
 
-void EnemyGenerator::generateEnemy()
+void EnemyGenerator::generateEnemy(int random)
 {
     int rowNum = rand()%4;
     if(rowIsOccupied[rowNum]){return;};
     rowIsOccupied[rowNum] = true;
     bool direction = rand()%2;
     bool pickEnemy = rand()%2;
+    if(random>=0){rowNum=random;direction=0;};
     Enemy newEnemy(215+(70*rowNum), 2-(4*direction), enemyImages[pickEnemy]);
     enemyList.push_back(newEnemy);
 }
