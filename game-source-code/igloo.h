@@ -9,16 +9,16 @@
 class Igloo
 {
     public:
-        Igloo();
+        Igloo(bool secondaryIgloo=false);
         virtual ~Igloo();
         void drawIgloo(sf::RenderWindow& window, int stage);
     protected:
 
     private:
         vector<sf::RectangleShape> iglooPieces;
-        void createBottomLayers();
-        void createRoofLayers();
-        void createDoor();
+        void createBottomLayers(bool secondaryIgloo);
+        void createRoofLayers(bool secondaryIgloo);
+        void createDoor(bool secondaryIgloo);
 };
 
 #endif // IGLOO_H

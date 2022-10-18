@@ -11,7 +11,7 @@ class Score
         Score();
         virtual ~Score();
         void drawScore(sf::RenderWindow& window);
-        void loadFont();
+        void loadFont(bool secondaryScore=false);
         void changeScore(int difference){scoreCount+=difference;};
         void resetScore(){scoreCount=0;};
         int getScore(){return scoreCount;};

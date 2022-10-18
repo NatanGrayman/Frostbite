@@ -14,6 +14,7 @@
 #include "temperature.h"
 #include "enemy.h"
 #include "enemyGenerator.h"
+#include "secondPlayer.h"
 class Game
 {
     public:
@@ -44,6 +45,9 @@ class Game
         Score score;
         Temperature temperature;
         EnemyGenerator enemyGenerator;
+
+        SecondPlayer secondPlayer;
+        void checkLanded2();
 
         void createBackground(); //create background image and stores in background.
         void loadLevelFont();

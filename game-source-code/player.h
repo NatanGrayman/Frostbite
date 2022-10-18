@@ -27,7 +27,6 @@ class Player : public Entity
         bool getGrounded(){return grounded;};
     protected:
 
-    private:
         void checkXBoundary();    //Function to check not out of bounds in horizontal direction
         void checkYBoundary();    //Function to check not out of bounds in vertical direction
         void finishGame();
@@ -44,6 +43,8 @@ class Player : public Entity
         sf::SoundBuffer buffer;
         sf::Sound jumpSound;
         sf::Texture texture;
+            private:
+
 };
 
 #endif // PLAYER_H
