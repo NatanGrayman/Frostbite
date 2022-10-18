@@ -60,7 +60,7 @@ void Game::loadAllTextures()
 {
     player.loadTexture(/*baileyTexture,*/ "resources/bailey.png");   // add the bailey image as a texture
     iceLevels.loadTexture(/*iceTexture,*/ "resources/iceBlock.png");       //add the ice block image as a texture
-
+    secondPlayer.loadTexture("resources/bailey.png");//
 }
 void Game::loadLevelFont()
 {
@@ -73,6 +73,8 @@ void Game::loadLevelFont()
 void Game::loadFont()
 {
     player.loadFont();
+    secondPlayer.loadFont();//
+    secondPlayer.score.loadFont(true);//
     score.loadFont();                                                       //load the scores font.
     temperature.loadFont();                                                 //load the temperature font.
     loadLevelFont();
@@ -82,6 +84,8 @@ void Game::resetGame()
 {
     alive = true;
     player.resetPlayer(true); //Reset the players properties.
+    secondPlayer.resetPlayer(true);//
+    secondPlayer.score.resetScore();//
     score.resetScore();
     iceLevels.resetActive(true);
     scoreIncrement=10;
@@ -99,7 +103,7 @@ void Game::playGame()
     window.setFramerateLimit(60);                                              //reset the score.
     while(window.isOpen())                                              //Loop as long as window is open
     {
-        if(player.getLives()<0)                                         //if the player loses the game and has no lives, return to the splash screen.
+        if(player.getLives()<0 || secondPlayer.getLives()<0)                                         //if the player loses the game and has no lives, return to the splash screen.
         {
             splashScreen();
         }
@@ -113,20 +117,24 @@ void Game::playGame()
             if(event.type == sf::Event::KeyPressed)                     //If a key is pressed,
             {
                 if(event.key.code==sf::Keyboard::Escape){window.close();}
-                else if(event.key.code==sf::Keyboard::Space && player.getLanded() && stage>0){iceLevels.changeDirection(false,player.getYPosition());stage-=((stage!=16 && stage>0));}
+                else if(event.key.code==sf::Keyboard::Space && stage>0 && (player.getLanded()||secondPlayer.getLanded())){iceLevels.changeDirection(false,player.getYPosition());stage-=((stage!=16 && stage>0));}
                 else
                 {
                     player.processEvents(event.key.code,true, finished);              //process the event.
+                    secondPlayer.processEvents(event.key.code,true, finished);//
                 }
             }
             if(event.type ==sf::Event::KeyReleased)                     //If the key is released,
             {
                 player.processEvents(event.key.code,false, finished);             //process the release.
+                secondPlayer.processEvents(event.key.code,false, finished);//
             }
         }
         window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
         window.draw(background);                                        //draw the background sprite.
         gameLogic();
+        secondPlayer.igloo.drawIgloo(window,stage);//
+        secondPlayer.score.drawScore(window);//
         igloo.drawIgloo(window, stage);                                 //draw the current stage of the igloo.
         score.drawScore(window);                                        //display the score.
         window.draw(levelText);                                         //draw the current level number.
@@ -156,11 +164,18 @@ void Game::processPlayer()
     player.drawInWindow(window);                                    // draw the player.
     player.drawLives(window);                                       //draw the lives remaining
     checkLanded();                                                  //check if the player has landed on the blocks.
+
+    alive = secondPlayer.checkDeath();                                    //check if the player has died, by falling into water.
+    secondPlayer.movePlayer(enemyGenerator.findCollision(secondPlayer));                 //move the player, pass in whether he is collided with an enemy.
+    if(secondPlayer.getGameWon()){finishGame();};                         //if the player has won the game and entered the igloo, process the animations.
+    secondPlayer.drawInWindow(window);                                    // draw the player.
+    secondPlayer.drawLives(window);                                       //draw the lives remaining
+    checkLanded2();
 }
 void Game::processTemperature()
 {
     if(temperature.getTimeRemaining()<=0){player.freezeDeath();alive=false;}    //if the temperature is below 0, the player freezes and dies.
-    temperature.drawTemperature(window, alive);                     //display the temperature.
+    temperature.drawTemperature(window, alive);                     //display the temperatu//
 }
 void Game::processEnemies()
 {
@@ -212,7 +227,23 @@ void Game::checkLanded()                                                        
         player.setFloorMomentum(0);                                               // set his floor momentum to 0;
     }
 }
-
+void Game::checkLanded2()                                                          //Check for whether the player landed on an Ice block.
+{
+    if(!secondPlayer.getGrounded()){secondPlayer.setLanded(false); secondPlayer.setFloorMomentum(0);iceLevels.resetActive();return;};//only check when on the ground.
+    int state = (iceLevels.findCollision(secondPlayer.getXPosition(), secondPlayer.getYPosition(), secondPlayer));
+    if(state>=0)                                                                  //Search for a collision of the players position within iceLevels.
+    {
+        secondPlayer.setLanded(true);                                                   //If there is a collision, set the landed state to true.
+        secondPlayer.setFloorMomentum(iceLevels.getMomentumOfRow(state));               // add the momentum of the floor to the players.
+        bool initialLanding = (!iceLevels.getActive(state));                      //If first time landed on block
+        if(initialLanding&&stage<16){iceLevels.setActive(state);stage++;secondPlayer.score.changeScore(scoreIncrement);};
+    }
+    else
+    {
+        secondPlayer.setLanded(false);                                                  //Otherwise set the landed state to false.
+        secondPlayer.setFloorMomentum(0);                                               // set his floor momentum to 0;
+    }
+}
 void Game::finishGame()
 {
     int frame=0;                                                //frames used to animate winning process
