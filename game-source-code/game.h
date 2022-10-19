@@ -25,16 +25,11 @@ class Game
         void processTemperature();
         void processEnemies();
         void checkLanded();
-        void finishGame();
-        void resetGame();
+        void checkLanded2();//
 
-        int stage=0;
-        bool finished = false; //is game over.
         bool alive; //is player dead
         int scoreIncrement=10;
-        int levelNumber=1;
         int enemyWeighting = 250;
-        int frameShown = 0;                                               //variable to store how many frames have been shown, allows animations.
 
     protected:
         int start = false;//
@@ -45,13 +40,13 @@ class Game
         Score score;
         Temperature temperature;
         EnemyGenerator enemyGenerator;
+        void setupGame();
+        int stage=0;
+        bool finished = false; //is game over.
 
         SecondPlayer secondPlayer;
-        void loadSecondPlayer();
-        void checkLanded2();
+        void setupSecondPlayer();
         int stage2=0;
         bool finished2=false;
-
-
 };
 #endif // GAME_H

@@ -15,6 +15,8 @@ class Screen: public Game
     private:
         int width=800; //Set initial width.
         int height=540; //Set initial height.
+        int frameShown = 0;                                               //variable to store how many frames have been shown, allows animations.
+        int levelNumber=1;
 
         sf::Sprite background; //Sprite initalised to hold the background.
         sf::RenderTexture backgroundTexture; //Create RenderTexture to store background
@@ -28,6 +30,7 @@ class Screen: public Game
         void loadSecondPlayerTextures();
 
         void drawObjects();
+        void finishGame();
 };
 
 #endif // SCREEN_H
