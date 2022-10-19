@@ -22,7 +22,7 @@ void Temperature::loadFont()   //Load temperature font
 void Temperature::drawTemperature(sf::RenderWindow& window, bool alive)
 {
     if(!alive){clock.restart();};   //If Bailey is not alive, restart the time.
-    temperatureText.setString(to_string(getTimeRemaining()));  //get the amount of time remaining
+    temperatureText.setString(to_string(getTimeRemaining())+"°");  //get the amount of time remaining
     window.draw(temperatureText);
 }
 
@@ -33,6 +33,6 @@ void Temperature::resetTemperature()
 
 void Temperature::enterIgloo(sf::RenderWindow& window, int seconds)  //When enter igloo, printing new time.
 {
-    temperatureText.setString(to_string(seconds));
+    temperatureText.setString(to_string(seconds)+"°");
     window.draw(temperatureText);
 }
