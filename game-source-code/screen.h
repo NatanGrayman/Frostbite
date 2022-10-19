@@ -26,6 +26,8 @@ class Screen: public Game
         void loadAllTextures();     //At the start of the game, all Textures are loaded
         void loadFont();
         void loadSecondPlayerTextures();
+
+        void drawObjects();
 };
 
 #endif // SCREEN_H

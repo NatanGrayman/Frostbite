@@ -39,53 +39,6 @@ void Game::resetGame()
     iceLevels.onePlayer();//
 }
 
-void Game::playGame()
-{
-    if(!start){return;};                                                //Check that user wants to play.
-    window.setFramerateLimit(60);                                              //reset the score.
-    while(window.isOpen())                                              //Loop as long as window is open
-    {
-        if(player.getLives()<0 && secondPlayer.getLives()<0)                                         //if the player loses the game and has no lives, return to the splash screen.
-        {
-            splashScreen();
-        }
-        sf::Event event;                                                //Create an event object to monitor for inputs.
-        while (window.pollEvent(event))                                 //For each event that occurs.
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                window.close();                                        //If the close button is pressed, Close the game window.
-            }
-            if(event.type == sf::Event::KeyPressed)                     //If a key is pressed,
-            {
-                if(event.key.code==sf::Keyboard::Escape){window.close();}
-                else if(event.key.code==sf::Keyboard::Space && stage>0 && player.getLanded()){iceLevels.changeDirection(false,player.getYPosition());stage-=((stage!=16 && stage>0));}
-                else if(start == 2 && event.key.code==sf::Keyboard::Tab && stage2>0 && secondPlayer.getLanded()){iceLevels.changeDirection(false,secondPlayer.getYPosition());stage2-=((stage2!=16 && stage2>0));}
-                else
-                {
-                    player.processEvents(event.key.code,true, finished);              //process the event.
-                    if(start==2){secondPlayer.processEvents(event.key.code,true, finished2);};//
-                }
-            }
-            if(event.type ==sf::Event::KeyReleased)                     //If the key is released,
-            {
-                player.processEvents(event.key.code,false, finished);             //process the release.
-                if(start==2){secondPlayer.processEvents(event.key.code,false, finished2);};//
-            }
-        }
-        window.clear(sf::Color(1,25,125));                            //clear the background of the window background color.
-        window.draw(background);                                        //draw the background sprite.
-        gameLogic();
-        if(start==2){secondPlayer.igloo.drawIgloo(window,stage2);};//
-        if(start==2){secondPlayer.score.drawScore(window);};//
-        igloo.drawIgloo(window, stage);                                 //draw the current stage of the igloo.
-        score.drawScore(window);                                        //display the score.
-        window.draw(levelText);                                         //draw the current level number.
-        frameShown++;
-        window.display();                                               //Display the current frame.
-    }
-}
-
 void Game::gameLogic()
 {
     processIceLevels();
@@ -129,29 +82,6 @@ void Game::processEnemies()
     bool prob = (enemyWeighting==(rand()%enemyWeighting+1));
     if(prob){enemyGenerator.generateEnemy(-1);};
     enemyGenerator.movePosition();                                           //move the enemies
-}
-
-void Game::createBackground()                 //Function to create the Background sprite
-{
-    if (!backgroundTexture.create(width, 210))                                    //Create a texture. with predefined dimensions
-        cout<<-1<<endl;
-
-    sf::RectangleShape sky(sf::Vector2f(width, 75));                    //Rectangle shape for the sky
-    sf::RectangleShape sunset(sf::Vector2f(width, 35));                 //Rectangle shape for the sunset
-    sf::RectangleShape iceLand(sf::Vector2f(width, 100));               //Rectangle shape for the tundra
-
-    sunset.setPosition(sf::Vector2f(0,75));                             //Set the position of the sunset
-    iceLand.setPosition(sf::Vector2f(0,110));                           //Set the position of the "iceland"
-
-    sky.setFillColor(sf::Color(45,50,184));                             //Set the color within the "sky".
-    sunset.setFillColor(sf::Color(222,159,85));                         //Set the color within the "sunset".
-    iceLand.setFillColor(sf::Color(193,192,193));                       //Set the color within the "iceland".
-
-    backgroundTexture.draw(sky);                                                  //Draw the "sky" texture.
-    backgroundTexture.draw(sunset);                                               //Draw the "sunset" texture.
-    backgroundTexture.draw(iceLand);                                              //Draw the "iceland" texture.
-    backgroundTexture.display();                                                  //Display each as a texture.
-    background.setTexture(backgroundTexture.getTexture());                        //add background sprite as background
 }
 
 void Game::checkLanded()                                                          //Check for whether the player landed on an Ice block.

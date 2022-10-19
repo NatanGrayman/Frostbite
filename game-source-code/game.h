@@ -19,12 +19,15 @@ class Game
 {
     public:
         Game(); //Game constructor
-        //sf::RenderWindow window{sf::VideoMode(800, 540), "FrostBite"}; //Game window
-        //void playGame();
-        //void splashScreen();
     private:
+        void processIceLevels();
+        void processPlayer();
+        void processTemperature();
+        void processEnemies();
+        void checkLanded();
+        void finishGame();
+        void resetGame();
 
-        int start = false;//
         int stage=0;
         bool finished = false; //is game over.
         bool alive; //is player dead
@@ -33,6 +36,9 @@ class Game
         int enemyWeighting = 250;
         int frameShown = 0;                                               //variable to store how many frames have been shown, allows animations.
 
+    protected:
+        int start = false;//
+        void gameLogic();
         Player player;           //Create player object
         IceLevels iceLevels;         //Pass in the initial velocity to the iceblock
         Igloo igloo;
@@ -46,13 +52,6 @@ class Game
         int stage2=0;
         bool finished2=false;
 
-        void gameLogic();
-        void processIceLevels();
-        void processPlayer();
-        void processTemperature();
-        void processEnemies();
-        void checkLanded();
-        void finishGame();
-        void resetGame();
+
 };
 #endif // GAME_H
