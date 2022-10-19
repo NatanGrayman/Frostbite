@@ -1,6 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "synchapi.h"
+#include "../game-source-code/screen.h"
 #include "../game-source-code/game.h"
 #include "../game-source-code/player.h"
 #include "../game-source-code/ice.h"
@@ -12,10 +13,10 @@
 
 TEST_CASE("Testing the game window")
 {
-    Game game = Game();
-    CHECK(game.window.isOpen());  //Checking if game window is open.
-    CHECK(game.window.getSize().x == 800);   //Check the width is 800.
-    CHECK(game.window.getSize().y == 540);   //Check the height is 540.
+    Screen screen;
+    CHECK(screen.window.isOpen());  //Checking if game window is open.
+    CHECK(screen.window.getSize().x == 800);   //Check the width is 800.
+    CHECK(screen.window.getSize().y == 540);   //Check the height is 540.
 }
 
 TEST_CASE("Testing player initial position")
@@ -130,17 +131,23 @@ TEST_CASE("Checking collision in the iceRow")
     player.loadTexture("resources/bailey.png");
     CHECK(iceRow.findCollision(player.getXPosition(), player.getYPosition(), player));  //Check collision is true.
 }
-/*
+TEST_CASE("Testing enemy movement")
+{
+    Enemy enemy(215, 2);
+    int x = enemy.getMomentum();
+    CHECK(x!=0);
+}
 TEST_CASE("Testing Enemy Collision")
 {
     //Enemy enemy(215, 2);          //Set the enemy position.
     EnemyGenerator enemy;
     enemy.generateEnemy(0);
-    Player player(-170,230);         //Set Player position
+
+    Player player(0,0);         //Set Player position
     sf::Texture playerTexture;
     player.loadTexture("resources/bailey.png");
     CHECK(enemy.findCollision(player)!=0);         //Check colision.
-}*/
+}
 TEST_CASE("Testing Score Functionality")
 {
     Score score;                    //Create a score.

@@ -10,6 +10,7 @@ Enemy::Enemy(float level, int iVelocity, vector<string> images)  //constuctor
         enemyRow.push_back(entity);
     }
     imgNames=images;
+    loadTexture("resources/"+images[0]);
 }
 Enemy::~Enemy()
 {
