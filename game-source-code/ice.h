@@ -29,6 +29,7 @@ class Ice : public Entity
         * @param float x which is used to see if the co-ordinates are contained within the bounded rectangle of collison.
         * @param float y which is used to check if the co-ordinates are contained within the bounded rectangle of collison.
         * @param Entity entity used to find the collision between the bounding box of respective entity.
+        * @return Returns true if a collision is found, otherwise false.
         */
         bool findCollision(float x, float y, Entity entity);
         /**@brief Function to change the momentum of iceBlock to the opposite direction.

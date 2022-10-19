@@ -4,7 +4,7 @@
 #include <vector>
 /**
 *@brief IceRow Class
-* that controls the logic of each row of ice within the four levels present.
+* that uses composition to control the logic of each row of ice within the four levels present.
 */
 class IceRow
 {
@@ -15,6 +15,9 @@ class IceRow
         *@param int iVelocity which inputs the Ice object's initial velocity.
         */
         IceRow(float level, int iVelocity);
+        /**
+        *@brief Default Destructor
+        */
         virtual ~IceRow();
         /**
         *@brief Function to render each ice block in the row to the window.
@@ -34,6 +37,7 @@ class IceRow
         * @param float x which is used to see if the co-ordinates are contained within the bounded rectangle of collison.
         * @param float y which is used to check if the co-ordinates are contained within the bounded rectangle of collison.
         * @param Entity entity used to find the collision between the bounding box of respective entity.
+        * @return Returns true if a collision is found, otherwise false.
         */
         bool findCollision(float x, float y, Entity entity);
         /**@brief Getter Function to get the momentum of each icerow.
