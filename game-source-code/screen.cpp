@@ -166,7 +166,9 @@ void Screen::drawObjects()
     player.drawLives(window);                                       //draw the lives remaining
     if(start==2){secondPlayer.drawInWindow(window);};                                    // draw the player.
     if(start==2){secondPlayer.drawLives(window);};                                       //draw the lives remaining
-    if(player.getGameWon()){finishGame();};
+    if(player.getGameWon() && start == 1){finishGame();};
+    if(player.getGameWon() && start == 2){winScreen(1);};
+    if(secondPlayer.getGameWon()){winScreen(2);};
     temperature.drawTemperature(window, player.checkDeath());                     //display the temperature//
     enemyGenerator.drawInWindow(window,frameShown);                          //draw and animate the enemies movement.
 }
@@ -200,4 +202,42 @@ void Screen::finishGame()
     player.resetPlayer(false);                                                                   //reset the players state for the new level.
     iceLevels.resetActive(true);
     enemyWeighting-=((levelNumber<=4)*50);
+}
+
+void Screen::winScreen(int playerNum)
+{
+    sf::Sprite winSprite;                                    //Create sprite for the win screen
+    sf::Texture winTexture;                                  //Create texture for the win screen
+
+    if(!winTexture.loadFromFile("resources/winScreenPlayer"+to_string(playerNum)+".PNG"))  //load from file specific wintexture.
+    {
+        cout<<"Error in loading texture";                          //Error message if does not load
+    }
+
+    winSprite.setTexture(winTexture);                       //Set the texture of the sprite.
+    float xScale = float(width)/1280;                             //Create the scale of the width to fit the window
+    float yScale = float(height)/720;                             //Create the scale of the height to fit the window
+    winSprite.setScale(sf::Vector2f(xScale,yScale));           //Set the scale
+
+    window.clear();
+    window.draw(winSprite);                                     //Draw in the splashsprite
+    window.display();
+    window.setFramerateLimit(60);                                       //Set the frame limit to 60.
+    while(window.isOpen())                                              //Loop as long as window is open
+    {
+        sf::Event event;                                                //Create an event object to monitor for inputs.
+        while (window.pollEvent(event))                                 //For each event that occurs.
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                window.close();                                        //If the close button is pressed, Close the game window.
+            }
+            if(event.key.code==sf::Keyboard::Escape){window.close();}
+            if(event.key.code == sf::Keyboard::G)                     //If the enter key is pressed,
+            {
+                splashScreen();
+                return;                                            //End the test.
+            }
+        }
+    }
 }

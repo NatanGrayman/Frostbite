@@ -42,6 +42,7 @@ class Screen: public Game
 
         void drawObjects();
         void finishGame();
+        void winScreen(int playerNum);
 };
 
 #endif // SCREEN_H

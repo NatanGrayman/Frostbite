@@ -20,6 +20,7 @@ void Game::setupSecondPlayer()
     stage2 = 0;
     iceLevels.twoPlayers();//
     iceLevels.resetActive(true,true);//
+    secondPlayer.score.resetScore();
 }
 void Game::setupGame()
 {
