@@ -28,8 +28,6 @@ class Game
         void checkLanded2();//
 
         bool alive; //is player dead
-        int scoreIncrement=10;
-        int enemyWeighting = 250;
 
     protected:
         int start = false;//
@@ -43,6 +41,9 @@ class Game
         void setupGame();
         int stage=0;
         bool finished = false; //is game over.
+
+        int scoreIncrement=10;
+        int enemyWeighting = 250;
 
         SecondPlayer secondPlayer;
         void setupSecondPlayer();
