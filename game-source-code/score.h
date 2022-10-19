@@ -34,7 +34,7 @@ class Score
         void resetScore(){scoreCount=0;};
         /**
         *@brief  Function to get the current value of the player's score.
-        *@param scoreCount returns the value of the players score.
+        *@return scoreCount returns the Integer value of the players score.
         */
         int getScore(){return scoreCount;};
     protected:
