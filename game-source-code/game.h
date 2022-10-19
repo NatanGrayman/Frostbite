@@ -19,12 +19,11 @@ class Game
 {
     public:
         Game(); //Game constructor
-        sf::RenderWindow window{sf::VideoMode(800, 540), "FrostBite"}; //Game window
-        void playGame();
-        void splashScreen();
+        //sf::RenderWindow window{sf::VideoMode(800, 540), "FrostBite"}; //Game window
+        //void playGame();
+        //void splashScreen();
     private:
-        int width=800; //Set initial width.
-        int height=540; //Set initial height.
+
         int start = false;//
         int stage=0;
         bool finished = false; //is game over.
@@ -33,11 +32,6 @@ class Game
         int levelNumber=1;
         int enemyWeighting = 250;
         int frameShown = 0;                                               //variable to store how many frames have been shown, allows animations.
-
-        sf::Sprite background; //Sprite initalised to hold the background.
-        sf::RenderTexture backgroundTexture; //Create RenderTexture to store background
-        sf::Font textFont;
-        sf::Text levelText;
 
         Player player;           //Create player object
         IceLevels iceLevels;         //Pass in the initial velocity to the iceblock
@@ -52,10 +46,6 @@ class Game
         int stage2=0;
         bool finished2=false;
 
-        void createBackground(); //create background image and stores in background.
-        void loadLevelFont();
-        void loadAllTextures();     //At the start of the game, all Textures are loaded
-        void loadFont();
         void gameLogic();
         void processIceLevels();
         void processPlayer();
