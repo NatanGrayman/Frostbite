@@ -2,7 +2,6 @@
 
 Igloo::Igloo(bool secondaryIgloo)
 {
-
     createBottomLayers(secondaryIgloo);
     createRoofLayers(secondaryIgloo);
     createDoor(secondaryIgloo);

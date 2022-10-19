@@ -2,13 +2,24 @@
 #define SCREEN_H
 #include "game.h"
 
+/**
+*@brief  Screen
+Top level class that handles the presentation layer and performs the graphics during the game loop.
+*/
 class Screen: public Game
 {
     public:
         Screen();
         virtual ~Screen();
         sf::RenderWindow window{sf::VideoMode(800, 540), "FrostBite"}; //Game window
+        /**
+        *@brief  Function to run the game loop.
+        */
         void playGame();
+        /**
+        *@brief  Function to display the splashScreen with the game rules and controls.
+        *Initializes objects so that the game is ready to play if desired.
+        */
         void splashScreen();
     protected:
 
