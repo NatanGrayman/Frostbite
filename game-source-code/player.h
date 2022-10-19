@@ -10,7 +10,7 @@ class Player : public Entity
         Player(float xInitial, float yInitial);
         virtual ~Player();  //Destructor
         void loadTexture(string name);
-        void loadFont();
+        void loadFont(bool secondary = false);
         void processEvents(sf::Keyboard::Key key, bool checkPressed, bool gameFinished);  //Member function to act on user input
         void movePlayer(int enemyVelocity);    //Member function to move the position of the player.
 

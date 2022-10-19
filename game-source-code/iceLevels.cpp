@@ -27,6 +27,15 @@ void IceLevels::drawInWindow(sf::RenderWindow &window) //function to draw each I
         iceLevels[j].drawInWindow(window); //render each iceRow in the window.
     }
 }
+void IceLevels::processSprite(int j)
+{
+    for(j=0;j<4;j++)
+    {
+        if(activated[j]&&activated2[j]){loadOneRowTexture("resources/landOnIceBlock.png", j);}
+        else if(activated[j]){loadOneRowTexture("resources/player1LandedBlock.png",j);}
+        else if(activated2[j]&&!activated[j]){loadOneRowTexture("resources/player2LandedBlock.png", j);}
+    }
+}
 
 void IceLevels::movePosition()
 {
@@ -49,14 +58,15 @@ void IceLevels::loadOneRowTexture(/*sf::Texture& texture,*/ string name, int row
     iceLevels[rowNum].loadTexture(/*texture,*/ name);
 }
 
-int IceLevels::findCollision(float x, float y, Entity entity) //search for a collision of each Ice block with inputted co-ordinates.
+int IceLevels::findCollision(float x, float y, Entity entity, bool secondP) //search for a collision of each Ice block with inputted co-ordinates.
 {
     for(int j=0;j<4; j++) //loop through each IceRow in iceLevels,
     {
         if(iceLevels[j].findCollision(x, y, entity)) //search for a collision for the current IceRow.
         {
-            loadOneRowTexture("resources/landOnIceBlock.png", j);
-            if(activated[j]!=1){iceBreak.play();};
+            if(!secondP){loadOneRowTexture("resources/landOnIceBlock.png", j);};
+            if(!secondP && activated[j]!=1){iceBreak.play();};
+            if(secondP &&activated2[j]!=1){iceBreak.play();};
             if(count(activated.begin(), activated.end(), 1) == 4){loadTexture("resources/iceBlock.png");};
             return j;                    //If a collision is found, return true.
         }
@@ -65,9 +75,9 @@ int IceLevels::findCollision(float x, float y, Entity entity) //search for a col
     return -1;                           //Otherwise return false.
 }
 
-void IceLevels::resetActive(bool begin) // reset the state of each row of iceBlocks.
+void IceLevels::resetActive(bool initial, bool secondary) // reset the state of each row of iceBlocks.
 {
-    if(count(activated.begin(), activated.end(), 1) == 4 ||begin)
+    if(!secondary && (count(activated.begin(), activated.end(), 1) == 4 ||initial))
     {
         loadTexture("resources/iceBlock.png");
         for(int j=0;j<4;j++)
@@ -75,7 +85,14 @@ void IceLevels::resetActive(bool begin) // reset the state of each row of iceBlo
             activated[j] = 0;
         }
     }
-
+    if(secondary && (count(activated2.begin(), activated2.end(), 1) == 4 ||initial))
+    {
+        loadTexture("resources/iceBlock.png");
+        for(int j=0;j<4;j++)
+        {
+            activated2[j] = 0;
+        }
+    }
 }
 
 void IceLevels::changeDirection(bool resetRows, float yPos)

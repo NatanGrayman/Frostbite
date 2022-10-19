@@ -25,7 +25,7 @@ class Game
     private:
         int width=800; //Set initial width.
         int height=540; //Set initial height.
-        bool start = false;
+        int start = false;//
         int stage=0;
         bool finished = false; //is game over.
         bool alive; //is player dead
@@ -47,7 +47,10 @@ class Game
         EnemyGenerator enemyGenerator;
 
         SecondPlayer secondPlayer;
+        void loadSecondPlayer();
         void checkLanded2();
+        int stage2=0;
+        bool finished2=false;
 
         void createBackground(); //create background image and stores in background.
         void loadLevelFont();

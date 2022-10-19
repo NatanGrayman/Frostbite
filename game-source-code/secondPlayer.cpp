@@ -2,7 +2,7 @@
 
 SecondPlayer::SecondPlayer()
 {
-    //ctor
+    lives=-1;
 }
 
 SecondPlayer::~SecondPlayer()
@@ -22,7 +22,7 @@ void SecondPlayer::processEvents(sf::Keyboard::Key key, bool checkPressed, bool 
         }
         if(key==sf::Keyboard::W && grounded)               //If up key was pressed and the player is grounded, set movement of player upwards(jump).
         {
-            if(gameFinished && (xPosition+36)>550 && xPosition<650 && yPosition==160){finishGame();};
+            if(gameFinished && (xPosition+36)>300 && xPosition<400 && yPosition==160){finishGame();};
             yMomentum=-5;
             grounded=false;
             jumpSound.play();

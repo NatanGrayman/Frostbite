@@ -92,6 +92,7 @@ void Player::freezeDeath()  //Method to check if temperature runs out.
 
 void Player::movePlayer(int enemyVelocity)                   //function to move player.
 {
+    if(lives<0){yPosition=160;positionUpdate();return;};
     if(!grounded)               //Check not grounded to set time in 'air'
     {
         ticks++;               //increase time in 'air'
@@ -143,12 +144,12 @@ void Player::finishGame() // function when player wins the game/level.
     cout<<"Player has won the game"<<endl;
 }
 
-void Player::loadFont()
+void Player::loadFont(bool secondary)
 {
     if(!playerFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};
     playerText.setFont(playerFont);
     playerText.setCharacterSize(22);
-    playerText.setPosition(sf::Vector2f(150,50));
+    playerText.setPosition(sf::Vector2f(150+(150*secondary),50));
     playerText.setFillColor(sf::Color(132,148,255));
 }
 
