@@ -3,10 +3,16 @@
 #include <vector>
 #include "iceRow.h"
 #include <SFML/Audio.hpp>
-
+/**
+*@brief IceLevels Class
+* that controls the logic and structure of the 4 iceLevels present.
+*/
 class IceLevels
 {
     public:
+        /**
+        *@brief Default Constructor that populates the the  iceLevels with 4 individual IceRows and initializes the variable to store the velocity that the Ice will move at.
+        */
         IceLevels();
         virtual ~IceLevels();
         void drawInWindow(sf::RenderWindow &window); // render each Ice in the window.
