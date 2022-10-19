@@ -55,13 +55,13 @@ void Game::processPlayer()
     alive = player.checkDeath();                                    //check if the player has died, by falling into water.
     player.movePlayer(enemyGenerator.findCollision(player));                 //move the player, pass in whether he is collided with an enemy.
     //if(player.getGameWon()){finishGame();};                         //if the player has won the game and entered the igloo, process the animations.
-    checkLanded();                                                  //check if the player has landed on the blocks.
+    checkCollisionWithIce();                                                  //check if the player has landed on the blocks.
 
     if(start!=2){return;};
     alive = secondPlayer.checkDeath();                                    //check if the player has died, by falling into water.
     secondPlayer.movePlayer(enemyGenerator.findCollision(secondPlayer));                 //move the player, pass in whether he is collided with an enemy.
     //if(secondPlayer.getGameWon()){finishGame();};                         //if the player has won the game and entered the igloo, process the animations.
-    checkLanded2();
+    checkCollisionWithIce2();
     iceLevels.processSprite(0);
 }
 void Game::processTemperature()
@@ -75,7 +75,7 @@ void Game::processEnemies()
     enemyGenerator.movePosition();                                           //move the enemies
 }
 
-void Game::checkLanded()                                                          //Check for whether the player landed on an Ice block.
+void Game::checkCollisionWithIce()                                                          //Check for whether the player landed on an Ice block.
 {
     if(!player.getGrounded()){player.setLanded(false); player.setFloorMomentum(0);iceLevels.resetActive();return;};//only check when on the ground.
     int state = (iceLevels.findCollision(player.getXPosition(), player.getYPosition(), player));
@@ -94,7 +94,7 @@ void Game::checkLanded()                                                        
         player.setFloorMomentum(0);                                               // set his floor momentum to 0;
     }
 }
-void Game::checkLanded2()                                                          //Check for whether the player landed on an Ice block.
+void Game::checkCollisionWithIce2()                                                          //Check for whether the player landed on an Ice block.
 {
     if(!secondPlayer.getGrounded()){secondPlayer.setLanded(false); secondPlayer.setFloorMomentum(0);iceLevels.resetActive(false, true);return;};//only check when on the ground.
     int state = (iceLevels.findCollision(secondPlayer.getXPosition(), secondPlayer.getYPosition(), secondPlayer, true));

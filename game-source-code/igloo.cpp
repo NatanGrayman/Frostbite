@@ -2,9 +2,7 @@
 
 Igloo::Igloo(bool secondaryIgloo)
 {
-    /// @brief The igloo object works by generating all the rectangles that compose the igloo, the rectangles are then displayed as required.
-    ///This implementation may be less memory efficient but it is more time efficient than recreating the rectangles each frame.
-    ///The pieces are stored in a vector of rectangles.
+
     createBottomLayers(secondaryIgloo);
     createRoofLayers(secondaryIgloo);
     createDoor(secondaryIgloo);
