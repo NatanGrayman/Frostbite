@@ -2,6 +2,7 @@
 
 Igloo::Igloo(bool secondaryIgloo)
 {
+    if(secondaryIgloo){color = sf::Color(98,151,163);};
     createBottomLayers(secondaryIgloo);
     createRoofLayers(secondaryIgloo);
     createDoor(secondaryIgloo);
@@ -13,7 +14,7 @@ void Igloo::createBottomLayers(bool secondaryIgloo)
     {
         sf::RectangleShape iglooPart(sf::Vector2f(50,20));
         iglooPart.setPosition(sf::Vector2f(500+((i%4)*50)-(250*secondaryIgloo),120-(int(i/4))*20));
-        iglooPart.setFillColor(sf::Color(125,125,125));
+        iglooPart.setFillColor(color);
         iglooPieces.push_back(iglooPart);
     }
 }
@@ -23,13 +24,13 @@ void Igloo::createRoofLayers(bool secondaryIgloo)
     {
         sf::RectangleShape iglooPart(sf::Vector2f(50,20));
         iglooPart.setPosition(sf::Vector2f(550+(50*j)-(250*secondaryIgloo),60));
-        iglooPart.setFillColor(sf::Color(125,125,125));
+        iglooPart.setFillColor(color);
         iglooPieces.push_back(iglooPart);
     }
     //create the final igloo piece
     sf::RectangleShape iglooPart(sf::Vector2f(50,20));
     iglooPart.setPosition(sf::Vector2f(575-(250*secondaryIgloo),40));
-    iglooPart.setFillColor(sf::Color(125,125,125));
+    iglooPart.setFillColor(color);
     iglooPieces.push_back(iglooPart);
 }
 void Igloo::createDoor(bool secondaryIgloo)

@@ -6,7 +6,9 @@
 #include "temperature.h"
 /**
 *@brief  Score Class
-that manages the player's score and increases and decreases accordingly
+*that manages the player's score and increases and decreases accordingly
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class Score
 {

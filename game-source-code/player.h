@@ -6,6 +6,8 @@
 /**
 *@brief Player Class
 *A type of Entity descendant that models the player throughout the runtime of the game/s.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class Player : public Entity
 {
@@ -94,7 +96,9 @@ class Player : public Entity
         */
         bool getGrounded(){return grounded;};
     protected:
-
+        /**
+        *@brief  //Function to check not out of bounds in horizontal direction
+        */
         void checkXBoundary();    //Function to check not out of bounds in horizontal direction
         void checkYBoundary();    //Function to check not out of bounds in vertical direction
         void finishGame();
@@ -111,7 +115,7 @@ class Player : public Entity
         sf::SoundBuffer buffer;
         sf::Sound jumpSound;
         sf::Texture texture;
-            private:
+        private:
 
 };
 

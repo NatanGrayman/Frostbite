@@ -7,7 +7,9 @@
 using namespace std;
 /**
 *@brief  Temperature Class
-that manages the Game clock, displays the time remaining, adjusts member variables as needed.
+*that manages the Game clock, displays the time remaining, adjusts member variables as needed.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class Temperature
 {

@@ -8,6 +8,8 @@
 /**
 *@brief Enemy Class
 * that uses composition to control the logic of each row of enemies within the four levels present.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class Enemy
 {

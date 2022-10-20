@@ -6,7 +6,9 @@
 #include "score.h"
 /**
 *@brief  secondPlayer
-Class to create the second player if chosen, and the extra objects associated with it. IE: the igloo and score.
+*Class to create the second player if chosen, and the extra objects associated with it. IE: the igloo and score.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class SecondPlayer : public Player
 {

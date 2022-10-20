@@ -17,7 +17,9 @@
 #include "secondPlayer.h"
 /**
 *@brief Game Class
- that handles the logic of the Game objects.
+ *that handles the logic of the Game objects.
+ *@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class Game
 {

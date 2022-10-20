@@ -4,6 +4,8 @@
 /**
 *@brief EnemyGenerator Class
 * that uses composition and random processes to generate and control varyig rows of Enemy objects.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class EnemyGenerator
 {

@@ -4,7 +4,9 @@
 
 /**
 *@brief  Screen
-Top level class that handles the presentation layer and performs the graphics during the game loop.
+*Top level class that handles the presentation layer and performs the graphics during the game loop.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class Screen: public Game
 {

@@ -5,7 +5,9 @@
 #include <SFML/Audio.hpp>
 /**
 *@brief IceLevels Class
-* that uses composition to control the logic and structure of the 4 iceRows present.
+* that uses composition to control the logic and structure of the iceRows present.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class IceLevels
 {

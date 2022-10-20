@@ -9,10 +9,7 @@
 int main()
 {
     srand(time(0));
-    /*Game game;              //Create the game object
-    game.splashScreen();    //Display the Splash Screen initially
-    game.playGame();        //Play game.
-*/
+
     Screen screen;
     screen.splashScreen();
     screen.playGame();

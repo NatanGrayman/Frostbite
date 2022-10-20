@@ -141,7 +141,6 @@ void Player::checkYBoundary()
 void Player::finishGame() // function when player wins the game/level.
 {
     gameWon = true;
-    cout<<"Player has won the game"<<endl;
 }
 
 void Player::loadFont(bool secondary)
@@ -149,7 +148,7 @@ void Player::loadFont(bool secondary)
     if(!playerFont.loadFromFile("resources/ARCADE_N.ttf")){cout<<"cant load font"<<endl;};
     playerText.setFont(playerFont);
     playerText.setCharacterSize(22);
-    playerText.setPosition(sf::Vector2f(150+(150*secondary),50));
+    playerText.setPosition(sf::Vector2f(150+(100*secondary),50));
     playerText.setFillColor(sf::Color(132,148,255));
 }
 

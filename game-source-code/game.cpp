@@ -55,13 +55,11 @@ void Game::processPlayer()
 {
     alive = player.checkDeath();                                    //check if the player has died, by falling into water.
     player.movePlayer(enemyGenerator.findCollision(player));                 //move the player, pass in whether he is collided with an enemy.
-    //if(player.getGameWon()){finishGame();};                         //if the player has won the game and entered the igloo, process the animations.
     checkCollisionWithIce();                                                  //check if the player has landed on the blocks.
 
     if(start!=2){return;};
     alive = secondPlayer.checkDeath();                                    //check if the player has died, by falling into water.
     secondPlayer.movePlayer(enemyGenerator.findCollision(secondPlayer));                 //move the player, pass in whether he is collided with an enemy.
-    //if(secondPlayer.getGameWon()){finishGame();};                         //if the player has won the game and entered the igloo, process the animations.
     checkCollisionWithIce2();
     iceLevels.processSprite(0);
 }
@@ -85,8 +83,6 @@ void Game::checkCollisionWithIce()                                              
         player.setLanded(true);                                                   //If there is a collision, set the landed state to true.
         player.setFloorMomentum(iceLevels.getMomentumOfRow(state));               // add the momentum of the floor to the players.
         bool initialLanding = (!iceLevels.getActive(state));                      //If first time landed on block
-        //score.changeScore((stage<16&&initialLanding)*scoreIncrement);             //increase the players score
-        //if(initialLanding&&stage<16){stage++;};                                   //add an extra piece to the igloo
         if(initialLanding&&stage<16){iceLevels.setActive(state);stage++;score.changeScore(scoreIncrement);};
     }
     else

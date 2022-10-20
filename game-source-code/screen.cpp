@@ -42,6 +42,7 @@ void Screen::splashScreen()                                       //Function to 
             if(event.key.code == sf::Keyboard::Enter || event.key.code ==sf::Keyboard::Num2)                     //If the enter key is pressed,
             {
                 start = 1;                                      //The game can now start
+                stage2=0;
                 levelNumber=1;
                 createBackground();                                // Build the Background sprite.
                 loadAllTextures();                                 //Load all the textures
@@ -61,8 +62,8 @@ void Screen::splashScreen()                                       //Function to 
 
 void Screen::loadAllTextures()
 {
-    player.loadTexture(/*baileyTexture,*/ "resources/bailey.png");   // add the bailey image as a texture
-    iceLevels.loadTexture(/*iceTexture,*/ "resources/iceBlock.png");       //add the ice block image as a texture
+    player.loadTexture("resources/bailey.png");   // add the bailey image as a texture
+    iceLevels.loadTexture("resources/iceBlock.png");       //add the ice block image as a texture
 }
 void Screen::loadLevelFont()
 {
@@ -83,6 +84,7 @@ void Screen::loadFont()
 }
 void Screen::loadSecondPlayerTextures()
 {
+    setupSecondPlayer();
     secondPlayer.loadTexture("resources/bailey2.png");//
     secondPlayer.loadFont(true);//
     secondPlayer.score.loadFont(true);//

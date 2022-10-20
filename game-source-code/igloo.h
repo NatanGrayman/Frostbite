@@ -9,6 +9,8 @@
 *This implementation may be less memory efficient but it is more time efficient than recreating the rectangles each frame.
 *The pieces are stored in a vector of rectangles.
 *@param secondaryIgloo a boolean argument to denote if this is the second players igloo.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class Igloo
 {
@@ -30,6 +32,7 @@ class Igloo
         void createBottomLayers(bool secondaryIgloo);
         void createRoofLayers(bool secondaryIgloo);
         void createDoor(bool secondaryIgloo);
+        sf::Color color = sf::Color(125,125,125);
 };
 
 #endif // IGLOO_H
