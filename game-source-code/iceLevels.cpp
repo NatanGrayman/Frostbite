@@ -103,5 +103,4 @@ void IceLevels::changeDirection(bool resetRows, float yPos)
         if((j%2==0)&&iceLevels[j].getMomentum()<0){iceLevels[j].changeDirection();};
         if((j%2==1)&&iceLevels[j].getMomentum()>0){iceLevels[j].changeDirection();};
     }
-
 }
