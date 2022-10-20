@@ -5,6 +5,8 @@
 /**
 *@brief Ice Class
 *A type of Entity descendant that models the ice throughout the runtime of the game/s.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 
 class Ice : public Entity

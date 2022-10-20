@@ -12,6 +12,8 @@ using namespace std;
 
 /**@brief Entity Class
 *creates a base object that can be moved, displayed, and collide with another Entity object.
+*@authors Gilad Kangisser (2367017)
+*@authors Natan Grayman (2344104)
 */
 class Entity                                                    //Entity is parent class for all 'live' objects that are used.
 {
