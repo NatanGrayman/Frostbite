@@ -1,3 +1,8 @@
+# Demo
+[![Demo Video](https://img.youtube.com/vi/OvSKmZw93qI/0.jpg)](https://youtu.be/OvSKmZw93qI?si=aBMRRFjh8WilW2yo)
+
+
+# Details
 • Initially, a Splash Screen with game instructions has been implemented, where the user needs to press Enter to start the game.
 
 •The game character, Bailey, is able to move horizontally whilst on ice block. 
